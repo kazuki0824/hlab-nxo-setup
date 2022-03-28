@@ -1,0 +1,3 @@
+[submodule "externals/hironx-interface"]
+	path = externals/hironx-interface
+	url = https://github.com/kensuke-harada/hironx-interface.git
