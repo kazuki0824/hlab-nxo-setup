@@ -1,0 +1,7 @@
+*.log
+*.lck
+*~
+*.save
+
+# Not to overwrite accidentally
+eclipse-workspace/
