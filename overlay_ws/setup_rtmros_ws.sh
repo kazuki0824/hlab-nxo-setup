@@ -13,5 +13,11 @@ rosdep update && rosdep install -y -i --from-paths src
 catkin config --install
 catkin b
 
-cp -r ./install /opt/preinstalled
-#cd .. && rm -r overlay_ws/
+
+if [ -f /.dockerenv ]; then
+    cp -r ./install /opt/preinstalled
+else
+    sudo cp -r ./install /opt/preinstalled
+    cd .. && rm -r overlay_ws/
+fi
+
