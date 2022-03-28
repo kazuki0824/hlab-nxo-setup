@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>RTSE_Files</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>2022_01_18_01_29_40_188__launch_RTC_hlab.xml</name>
+			<type>1</type>
+			<location>/home/hlab/kazuki/eclipse-workspace/launch_RTC_hlab.xml</location>
+		</link>
+		<link>
+			<name>2022_01_18_01_52_10_651__launch_RTC.xml</name>
+			<type>1</type>
+			<location>/home/hlab/kazuki/eclipse-workspace/launch_RTC.xml</location>
+		</link>
+		<link>
+			<name>2022_01_24_01_52_20_346__launch_RTC_hlab (copy).xml</name>
+			<type>1</type>
+			<location>/home/hlab/kazuki/eclipse-workspace/launch_RTC_hlab (copy).xml</location>
+		</link>
+		<link>
+			<name>2022_02_09_12_38_34_456__launch_RTC_hlab_minimal.xml</name>
+			<type>1</type>
+			<location>/home/hlab/kazuki/eclipse-workspace/launch_RTC_hlab_minimal.xml</location>
+		</link>
+	</linkedResources>
+</projectDescription>
