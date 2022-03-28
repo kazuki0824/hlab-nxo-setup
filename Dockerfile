@@ -15,6 +15,8 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 WORKDIR /
 RUN rm -r /tmp/overlay_ws
 COPY ./rtm_entrypoint.sh /
+RUN chmod +x /rtm_entrypoint.sh
 ENTRYPOINT [ "/rtm_entrypoint.sh" ]
+CMD [ "bash" ]
 
 
