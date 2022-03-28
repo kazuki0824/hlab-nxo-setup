@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package>
+  <name>nextage_bringup_hlab</name>
+  <version>2.2.0</version>
+  <description>
+  The metapackage for Harada Lab's nextage platforms.
+  The rtmros_nextage package is a ROS interface for <a href = "http://nextage.kawada.jp/en/">Nextage</a> dual-armed robot from Kawada Robotics Inc.
+  </description> 
+
+  <maintainer email="maleicacid824+dev@gmail.com">Kazuki Kuroda</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <run_depend>rtmros_nextage</run_depend>
+  <run_depend>rtmros_hironx</run_depend>
+
+  <export>
+    <metapackage/>
+  </export>
+</package>
