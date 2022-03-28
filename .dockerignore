@@ -1,0 +1,4 @@
+*
+!overlay_ws/
+!externals/hironx-interface/HiroNXInterface/HiroNXGUI/
+!*.sh
