@@ -33,7 +33,7 @@ git clone https://github.com/start-jsk/rtmros_hironx.git --depth 1 ; \
 
 set -e
 cd ../..
-if [ $IN_BUILD -e 0 ] && [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
+if [ $IN_BUILD -eq 0 ] && [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
     sudo rosdep init
 fi
 rosdep update --include-eol-distros && rosdep install -y -i --from-paths src
@@ -43,7 +43,7 @@ catkin b --no-status --summarize
 # catkin test
 
 
-if [ $IN_BUILD -ne 0 ] then
+if [ $IN_BUILD -ne 0 ]; then
     cp -v -r ./install /opt/preinstalled
 else
     echo "Install files to /opt/preinstalled..."
