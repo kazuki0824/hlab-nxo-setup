@@ -1,5 +1,5 @@
 # hlab-nxo-setup
-
+[![Docker](https://github.com/kazuki0824/hlab-nxo-setup/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/kazuki0824/hlab-nxo-setup/actions/workflows/docker-publish.yml)
 ## How to use
 
 1. Clone this recursively ```git clone https://github.com/kazuki0824/hlab-nxo-setup.git --depth 1 --recursive```
@@ -10,3 +10,8 @@
 5. ```source /opt/preinstalled/setup.bash```
 
 ## How to use (Docker)
+
+```bash
+cd hlab-nxo-setup
+docker build . --build-arg DISTRIBUTION=<your_distro_name>
+```
