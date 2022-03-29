@@ -7,6 +7,6 @@
 2. Enter externals/, and then run ```./install_RTP.sh```
 3. Install ROS1 by following [this](INSTALL_ROS.md) instruction 
 4. Enter overlay\_ws/, and run ```ROS_DISTRO=<your_distro> ./setup_rtmros_ws.sh```
-5. ```bash ./opennextage_kazuki.sh```
+5. ```source /opt/preinstalled/setup.bash```
 
 ## How to use (Docker)
