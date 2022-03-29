@@ -1,4 +1,5 @@
-FROM ros:melodic
+ARG DISTRIBUTION=melodic
+FROM ros:${DISTRIBUTION}
 
 ENV DEBIAN_FRONTEND=noninteractive
 

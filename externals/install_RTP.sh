@@ -15,7 +15,7 @@ sed -i -e "s#file:///home/openrtm/public_html/pub/eclipse/projects/oxygen,##" ./
 
 unzip -j -d ../eclipse/dropins openrtp-*.zip
 
-cd .. && rm -r OpenRTP-aist
+cd .. && sudo rm -r OpenRTP-aist
 
 sudo apt purge $PKGS --auto-remove
 sudo apt install openjdk-8-jre -y --no-install-recommends
