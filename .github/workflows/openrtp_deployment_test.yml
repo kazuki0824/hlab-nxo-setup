@@ -1,0 +1,25 @@
+name: Check OpenRTP Installer
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+
+jobs:
+  one_job:
+    strategy:
+      matrix:
+        platform: [ubuntu-20.04, ubuntu-18.04, ubuntu-latest]
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+          lfs: true
+        
+      - name: Build & Install OpenRTP
+        run: |
+        cd externals/
+        ./install_RTP.sh
