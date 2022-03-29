@@ -38,8 +38,8 @@ if [ $IN_BUILD -e 0 ] && [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]
 fi
 rosdep update --include-eol-distros && rosdep install -y -i --from-paths src
 catkin config --install
-catkin b
-catkin test
+catkin b --no-status --summarize
+catkin test --no-status --summarize
 
 
 if [ $IN_BUILD -ne 0 ] then
