@@ -26,7 +26,7 @@ git clone https://github.com/choreonoid/choreonoid.git --depth 1 -b $CNOID_TAG
 
 ln -s `realpath ./grasp-plugin` ./choreonoid/ext/graspPlugin
 echo "Ubuntu $VERSION_ID is selected. Installing dependencies..."
-wget https://raw.githubusercontent.com/choreonoid/choreonoid/master/misc/script/install-requisites-ubuntu-$VERSION_ID.sh -P ./choreonoid/misc/script/ -O install-requisites-ubuntu-$VERSION_ID.sh || echo 'Fetching has been skipped since not found.'
+wget https://raw.githubusercontent.com/choreonoid/choreonoid/v1.7.0/misc/script/install-requisites-ubuntu-$VERSION_ID.sh -P ./choreonoid/misc/script/ -O install-requisites-ubuntu-$VERSION_ID.sh || echo 'Fetching has been skipped since not found.'
 
 source ./choreonoid/misc/script/install-requisites-ubuntu-$VERSION_ID.sh
 
