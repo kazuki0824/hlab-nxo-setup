@@ -1,12 +1,15 @@
 #!/bin/bash
 set -eu
 
-GRASP_PLUGINS="Grasp\;PRM\;GeometryHandler\;RobotInterface\;ConstraintIK\;SoftFingerStability\;PCL\;GraspDataGen\;MotionFile"
-GRASP_ROBOT_MODELS_PLUGINS='HIRO/Plugin'
+export GRASP_PLUGINS="Grasp\;PRM\;GeometryHandler\;RobotInterface\;ConstraintIK\;SoftFingerStability\;PCL\;GraspDataGen\;MotionFile"
+export GRASP_ROBOT_MODELS_PLUGINS='HIRO/Plugin'
+export CNOID_TAG=${1:-v1.7.0}
+env | grep ROS_DISTRO
+env | grep CNOID_TAG
 env | grep GRASP
 . /etc/os-release
 echo "Ubuntu $VERSION_ID is selected."
-echo "\n\n" ; sleep 3
+sleep 3
 
 
 
@@ -19,7 +22,7 @@ if [ ! -d ./grasp-plugin ]; then
   exit 1
 fi
 
-git clone https://github.com/choreonoid/choreonoid.git --depth 1 -b ${1:-v1.7.0}
+git clone https://github.com/choreonoid/choreonoid.git --depth 1 -b $CNOID_TAG
 
 ln -s `realpath ./grasp-plugin` ./choreonoid/ext/graspPlugin
 echo "Ubuntu $VERSION_ID is selected. Installing dependencies..."
