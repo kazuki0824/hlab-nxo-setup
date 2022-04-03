@@ -46,7 +46,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        cnoid_tag: ["v1.7.0", "v1.6.0", "v1.5.0"]
+        cnoid_tag: ["v1.7.0", "v1.6.0"]
     container:
       image: ghcr.io/kazuki0824/hlab-nxo-setup:kinetic
       credentials:
@@ -66,7 +66,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        cnoid_tag: ["v1.6.0", "v1.5.0"]
+        cnoid_tag: ["v1.6.0"]
     container:
       image: ghcr.io/kazuki0824/hlab-nxo-setup:indigo
       credentials:
