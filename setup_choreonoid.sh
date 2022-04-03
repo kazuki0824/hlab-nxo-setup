@@ -26,9 +26,8 @@ git clone https://github.com/choreonoid/choreonoid.git --depth 1 -b $CNOID_TAG
 
 ln -s `realpath ./grasp-plugin` ./choreonoid/ext/graspPlugin
 echo "Ubuntu $VERSION_ID is selected. Installing dependencies..."
-if [ ! -f ./choreonoid/misc/script/install-requisites-ubuntu-$VERSION_ID.sh ]; then
-    wget https://raw.githubusercontent.com/choreonoid/choreonoid/master/misc/script/install-requisites-ubuntu-$VERSION_ID.sh -P ./choreonoid/misc/script/ -O install-requisites-ubuntu-$VERSION_ID.sh
-fi
+wget https://raw.githubusercontent.com/choreonoid/choreonoid/master/misc/script/install-requisites-ubuntu-$VERSION_ID.sh -P ./choreonoid/misc/script/ -O install-requisites-ubuntu-$VERSION_ID.sh || echo 'Fetching has been skipped since not found.'
+
 source ./choreonoid/misc/script/install-requisites-ubuntu-$VERSION_ID.sh
 
 
@@ -39,3 +38,25 @@ cmake ../choreonoid -DGRASP_PLUGINS=$GRASP_PLUGINS \
 -DBUILD_GRASP_PCL_PLUGIN=ON
 LIBRARY_PATH=/opt/ros/${ROS_DISTRO}/lib make -j`nproc` -k && cd ..
 echo "Leaving build-choreonoid/..."
+
+
+echo "Regenerate IDL..."
+ARRAY[0]="./hlab-nxo-setup/externals/hironx-interface/HiroNXInterface/HiroNXGUI/HIROController.idl"
+ARRAY[1]="./hlab-nxo-setup/externals/hironx-interface/HiroNXInterface/HiroNXGUI/HiroNX.idl"
+ARRAY[2]="./choreonoid/ext/graspPlugin/RobotInterface/Nextage/NextageInterface/HIROController.idl"
+ARRAY[3]="./choreonoid/ext/graspPlugin/RobotInterface/Nextage/NextageInterface/HiroNX.idl"
+ARRAY[4]="./choreonoid/ext/graspPlugin/RobotInterface/Nextage/PortDuplicator/HIROController.idl"
+ARRAY[5]="./choreonoid/ext/graspPlugin/RobotInterface/Nextage/PortDuplicator/HiroNX.idl"
+ARRAY[6]="./choreonoid/ext/graspPlugin/RobotInterface/Nextage/THK/HIROController.idl"
+ARRAY[7]="./choreonoid/ext/graspPlugin/RobotInterface/Nextage/THK/HiroNX.idl"
+
+for item in ${ARRAY[@]}
+do
+  P=`pwd`
+  NAME=`basename $item`
+  echo "Entering `dirname $item`..."
+  cd `dirname $item`
+  omniidl -bpython -v $NAME
+  cd $P
+done
+
