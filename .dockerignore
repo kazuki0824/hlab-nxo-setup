@@ -1,4 +1,8 @@
 *
 !overlay_ws/
 !externals/hironx-interface/HiroNXInterface/HiroNXGUI/
+!externals/OpenRTP-aist/
+!externals/*.tar.gz
+!externals/*.sh
+!eclipse-workspace/
 !*.sh

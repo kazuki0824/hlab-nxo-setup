@@ -13,7 +13,17 @@
 
 ## How to use (Docker)
 
+### Build
 ```bash
 cd hlab-nxo-setup
 docker build . --build-arg DISTRIBUTION=<your_distro_name>
 ```
+
+### Usage
+```bash
+xhost +local:user
+docker run -it -e DISPLAY=unix$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix ghcr.io/kazuki0824/hlab-nxo-setup:melodic
+xhost -local:user
+```
+Next, follow [this](https://gist.github.com/kazuki0824/68b4cc31a545bb71d6af11322545236b) tutorial to use Nextage.
+<script src="https://gist.github.com/kazuki0824/68b4cc31a545bb71d6af11322545236b.js"></script>
