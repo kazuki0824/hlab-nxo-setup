@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eu
 
-export GRASP_PLUGINS="Grasp\;PRM\;GeometryHandler\;RobotInterface\;ConstraintIK\;SoftFingerStability\;PCL\;GraspDataGen\;MotionFile"
+export GRASP_PLUGINS="Grasp;PRM;GeometryHandler;RobotInterface;ConstraintIK;SoftFingerStability;PCL;GraspDataGen;MotionFile"
 export GRASP_ROBOT_MODELS_PLUGINS='HIRO/Plugin'
 export CNOID_TAG=${1:-v1.7.0}
 env | grep ROS_DISTRO
