@@ -37,6 +37,7 @@ jobs:
       - name: Fetch graspPlugin from original gitlab
         run: cd / && git clone http://${{ secrets.GRASPPLUGIN_CRED_USER }}:${{ secrets.GRASPPLUGIN_CRED_PASS }}@spica.ms.t.kanazawa-u.ac.jp/gitlab/tsuji/grasp-plugin.git --depth 1 -b pcl-python-bindings
       - name: Execute setup_choreonoid.sh
+        shell: bash
         run: cd / && . ./rtm_entrypoint.sh && ./hlab-nxo-setup/setup_choreonoid.sh ${{ matrix.cnoid_tag }}
 
   orig-kinetic:
@@ -56,4 +57,5 @@ jobs:
       - name: Fetch graspPlugin from original gitlab
         run: cd / && git clone http://${{ secrets.GRASPPLUGIN_CRED_USER }}:${{ secrets.GRASPPLUGIN_CRED_PASS }}@spica.ms.t.kanazawa-u.ac.jp/gitlab/tsuji/grasp-plugin.git --depth 1 -b pcl-python-bindings
       - name: Execute setup_choreonoid.sh
+        shell: bash
         run: cd / && . ./rtm_entrypoint.sh && ./hlab-nxo-setup/setup_choreonoid.sh ${{ matrix.cnoid_tag }}
