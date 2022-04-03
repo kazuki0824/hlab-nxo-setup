@@ -1,4 +1,4 @@
-name: Docker
+name: graspPlugin Builder
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -20,16 +20,15 @@ env:
 
 
 jobs:
-  orig:
-    name: graspPlugin(Original)
+  orig-melodic:
+    name: graspPlugin(original, melodic)
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        rosdistro: [melodic, kinetic, indigo]
         cnoid_tag: ["v1.7.0", "v1.6.0", "v1.5.0"]
     container:
-      image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.rosdistro }}
+      image: ghcr.io/kazuki/hlab-nxo-setup:melodic
 
     steps:
       - name: Checkout repository
@@ -37,7 +36,28 @@ jobs:
         with:
           submodules: recursive
           lfs: false
-      - name: Fetch graspPlugin
+      - name: Fetch graspPlugin from original gitlab
+        run: git clone http://${{ secrets.GRASPPLUGIN_CRED_USER }}:${{ secrets.GRASPPLUGIN_CRED_PASS }}@spica.ms.t.kanazawa-u.ac.jp/gitlab/tsuji/grasp-plugin.git --depth 1
+      - name: Execute setup_choreonoid.sh
+        run: ./setup_choreonoid.sh ${{ matrix.cnoid_tag }}
+
+  orig-kinetic:
+    name: graspPlugin(original, kinetic)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        cnoid_tag: ["v1.7.0", "v1.6.0", "v1.5.0"]
+    container:
+      image: ghcr.io/kazuki/hlab-nxo-setup:kinetic
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          lfs: false
+      - name: Fetch graspPlugin from original gitlab
         run: git clone http://${{ secrets.GRASPPLUGIN_CRED_USER }}:${{ secrets.GRASPPLUGIN_CRED_PASS }}@spica.ms.t.kanazawa-u.ac.jp/gitlab/tsuji/grasp-plugin.git --depth 1
       - name: Execute setup_choreonoid.sh
         run: ./setup_choreonoid.sh ${{ matrix.cnoid_tag }}
