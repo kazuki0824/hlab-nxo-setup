@@ -28,7 +28,7 @@ jobs:
       matrix:
         cnoid_tag: ["v1.7.0", "v1.6.0", "v1.5.0"]
     container:
-      image: ghcr.io/kazuki/hlab-nxo-setup:melodic
+      image: ghcr.io/kazuki0824/hlab-nxo-setup:melodic
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.github_token }}
@@ -52,7 +52,7 @@ jobs:
       matrix:
         cnoid_tag: ["v1.7.0", "v1.6.0", "v1.5.0"]
     container:
-      image: ghcr.io/kazuki/hlab-nxo-setup:kinetic
+      image: ghcr.io/kazuki0824/hlab-nxo-setup:kinetic
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.github_token }}
