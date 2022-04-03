@@ -10,6 +10,8 @@ on:
 jobs:
   one_job:
     strategy:
+    # java has little difference among environments, so fail-fast works effective.
+      fail-fast: true
       matrix:
         platform: [ubuntu-20.04, ubuntu-18.04, ubuntu-latest]
     runs-on: ${{ matrix.platform }}
