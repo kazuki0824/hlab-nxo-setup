@@ -13,7 +13,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt update && \
-    apt install -y --no-install-recommends git python-catkin-tools
+    apt install -y --no-install-recommends git python-catkin-tools wget
 
 COPY ./overlay_ws/ /tmp/overlay_ws/
 WORKDIR /tmp/overlay_ws
@@ -23,9 +23,20 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 WORKDIR /
 RUN rm -r /tmp/overlay_ws
 COPY ./rtm_entrypoint.sh /
-COPY --from=javabuild /tmp/externals/eclipse /hlab-nxo-setup/externals/
-COPY --from=javabuild /tmp/externals/hironx-interface /hlab-nxo-setup/externals/
+COPY ./eclipse-workspace /root/eclipse-workspace/
+COPY ./eclipse-workspace /hlab-nxo-setup/eclipse-workspace/
+COPY --from=javabuild /tmp/externals/eclipse /hlab-nxo-setup/externals/eclipse/
+COPY --from=javabuild /tmp/externals/hironx-interface /hlab-nxo-setup/externals/hironx-interface/
 COPY ./setup_choreonoid.sh /hlab-nxo-setup/
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    apt install software-properties-common --no-install-recommends -y && \
+    add-apt-repository ppa:openjdk-r/ppa -y && \
+    apt update && \
+    apt install openjdk-8-jre -y --no-install-recommends && \
+    apt purge software-properties-common --auto-remove -y && \
+    update-java-alternatives -s java-1.8.0-openjdk-amd64
+    
+RUN apt install -y --no-install-recommends cmake-qt-gui gnome-terminal dbus-x11
 
 # It is not intended to use rtm_entrypoint outside the Docker img, so allow execution only in Docker
 RUN chmod +x /rtm_entrypoint.sh
