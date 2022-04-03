@@ -34,6 +34,12 @@ jobs:
         password: ${{ secrets.github_token }}
 
     steps:
+      - name: Install the latest version of Git
+        run: |
+          apt-get install software-properties-common -y
+          add-apt-repository ppa:git-core/ppa -y
+          apt-get update
+          apt-get install git -y
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
@@ -58,6 +64,12 @@ jobs:
         password: ${{ secrets.github_token }}
 
     steps:
+      - name: Install the latest version of Git
+        run: |
+          apt-get install software-properties-common -y
+          add-apt-repository ppa:git-core/ppa -y
+          apt-get update
+          apt-get install git -y
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
