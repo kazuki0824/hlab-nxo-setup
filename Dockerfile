@@ -25,7 +25,9 @@ RUN rm -r /tmp/overlay_ws
 COPY ./rtm_entrypoint.sh /
 COPY --from=javabuild /tmp/externals/eclipse /hlab-nxo-setup/externals/
 COPY --from=javabuild /tmp/externals/hironx-interface /hlab-nxo-setup/externals/
+COPY ./setup_choreonoid.sh /hlab-nxo-setup/
 
+# It is not intended to use rtm_entrypoint outside the Docker img, so allow execution only in Docker
 RUN chmod +x /rtm_entrypoint.sh
 ENTRYPOINT [ "/rtm_entrypoint.sh" ]
 CMD [ "bash" ]
