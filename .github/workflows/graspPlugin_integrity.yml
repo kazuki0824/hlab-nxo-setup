@@ -46,7 +46,7 @@ jobs:
           submodules: recursive
           lfs: false
       - name: Fetch graspPlugin from original gitlab
-        run: git clone http://${{ secrets.GRASPPLUGIN_CRED_USER }}:${{ secrets.GRASPPLUGIN_CRED_PASS }}@spica.ms.t.kanazawa-u.ac.jp/gitlab/tsuji/grasp-plugin.git --depth 1
+        run: git clone http://${{ secrets.GRASPPLUGIN_CRED_USER }}:${{ secrets.GRASPPLUGIN_CRED_PASS }}@spica.ms.t.kanazawa-u.ac.jp/gitlab/tsuji/grasp-plugin.git --depth 1 -b pcl-python-bindings
       - name: Execute setup_choreonoid.sh
         run: ./setup_choreonoid.sh ${{ matrix.cnoid_tag }}
 
@@ -76,6 +76,6 @@ jobs:
           submodules: recursive
           lfs: false
       - name: Fetch graspPlugin from original gitlab
-        run: git clone http://${{ secrets.GRASPPLUGIN_CRED_USER }}:${{ secrets.GRASPPLUGIN_CRED_PASS }}@spica.ms.t.kanazawa-u.ac.jp/gitlab/tsuji/grasp-plugin.git --depth 1
+        run: git clone http://${{ secrets.GRASPPLUGIN_CRED_USER }}:${{ secrets.GRASPPLUGIN_CRED_PASS }}@spica.ms.t.kanazawa-u.ac.jp/gitlab/tsuji/grasp-plugin.git --depth 1 -b pcl-python-bindings
       - name: Execute setup_choreonoid.sh
         run: ./setup_choreonoid.sh ${{ matrix.cnoid_tag }}
