@@ -8,7 +8,7 @@ on:
 
 
 jobs:
-  one_job:
+  openrtp:
     strategy:
     # java has little difference among environments, so fail-fast works effective.
       fail-fast: true
