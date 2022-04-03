@@ -27,7 +27,7 @@ git clone https://github.com/choreonoid/choreonoid.git --depth 1 -b $CNOID_TAG
 ln -s `realpath ./grasp-plugin` ./choreonoid/ext/graspPlugin
 echo "Ubuntu $VERSION_ID is selected. Installing dependencies..."
 if [ ! -f ./choreonoid/misc/script/install-requisites-ubuntu-$VERSION_ID.sh ]; then
-    wget https://raw.githubusercontent.com/choreonoid/choreonoid/master/misc/script/install-requisites-ubuntu-$VERSION_ID.sh -P ./choreonoid/misc/script/
+    wget https://raw.githubusercontent.com/choreonoid/choreonoid/master/misc/script/install-requisites-ubuntu-$VERSION_ID.sh -P ./choreonoid/misc/script/ -O install-requisites-ubuntu-$VERSION_ID.sh
 fi
 source ./choreonoid/misc/script/install-requisites-ubuntu-$VERSION_ID.sh
 
