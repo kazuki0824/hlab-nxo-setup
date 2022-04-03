@@ -1,1 +1,1 @@
-eclipse-jee-oxygen-3a-linux-gtk-x86_64.tar.gz filter=lfs diff=lfs merge=lfs -text
+eclipse-java-oxygen-3a-linux-gtk-x86_64.tar.gz filter=lfs diff=lfs merge=lfs -text
