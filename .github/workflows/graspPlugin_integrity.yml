@@ -35,7 +35,7 @@ jobs:
       - name: Install dependencies
         run: |
           apt update
-          apt install -y wget ros-${{ matrix.rosdistro }}-openrtm ros-${{ matrix.rosdistro }}-openrtm-python
+          apt install -y wget ros-${{ matrix.rosdistro }}-openrtm-aist ros-${{ matrix.rosdistro }}-openrtm-aist-python
       - name: Execute setup_choreonoid.sh
         shell: bash
         run: source ./rtm_entrypoint.sh && cd .. && ./hlab-nxo-setup/setup_choreonoid.sh ${{ matrix.cnoid_tag }}
