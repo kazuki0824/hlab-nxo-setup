@@ -13,14 +13,7 @@ on:
   pull_request:
     branches: [ main ]
 
-env:
-  REGISTRY: ghcr.io
-  # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}
-
-
 jobs:
-
   orig:
     name: graspPlugin(original, kinetic)
     runs-on: ubuntu-latest
@@ -31,9 +24,6 @@ jobs:
         rosdistro: [ "melodic", "kinetic", "indigo" ]
     container:
       image: ros:${{ matrix.rosdistro }}
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.github_token }}
 
     steps:
       - name: Checkout repository
