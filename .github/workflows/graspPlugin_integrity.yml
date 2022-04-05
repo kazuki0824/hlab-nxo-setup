@@ -29,11 +29,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          submodules: recursive
           lfs: false
       - name: Fetch graspPlugin from original gitlab
         run: git clone http://${{ secrets.GRASPPLUGIN_CRED_USER }}:${{ secrets.GRASPPLUGIN_CRED_PASS }}@spica.ms.t.kanazawa-u.ac.jp/gitlab/tsuji/grasp-plugin.git --depth 1 -b pcl-python-bindings ../grasp-plugin
       - name: Execute setup_choreonoid.sh
         shell: bash
-        run: cd .. && ./rtm_entrypoint.sh && ./hlab-nxo-setup/setup_choreonoid.sh ${{ matrix.cnoid_tag }}
+        run: source ./rtm_entrypoint.sh && cd .. && ./hlab-nxo-setup/setup_choreonoid.sh ${{ matrix.cnoid_tag }}
       
