@@ -11,10 +11,6 @@ env | grep GRASP
 echo "Ubuntu $VERSION_ID is selected."
 sleep 3
 
-if [  ${ROS_DISTRO} = "indigo" ]; then
-  sudo apt install cmake3 -y
-fi
-
 if [ ! -d ./hlab-nxo-setup ]; then
   echo "./hlab-nxo-setup not found."
   exit 1
@@ -39,6 +35,9 @@ else
 fi
 source ./choreonoid/misc/script/install-requisites-ubuntu-$VERSION_ID.sh
 
+if [  ${ROS_DISTRO} = "indigo" ]; then
+  sudo apt install cmake3 -y
+fi
 
 echo "Entering build-choreonoid/..."
 mkdir ./build-choreonoid && cd ./build-choreonoid
