@@ -30,7 +30,7 @@ echo "Ubuntu $VERSION_ID is selected. Installing dependencies...\n"
 
 wget --spider https://raw.githubusercontent.com/choreonoid/choreonoid/v1.7.0/misc/script/install-requisites-ubuntu-$VERSION_ID.sh
 if [ $? -eq 0 ]; then
-  rm ./choreonoid/misc/script/install-requisites-ubuntu-$VERSION_ID.sh || ;
+  rm ./choreonoid/misc/script/install-requisites-ubuntu-$VERSION_ID.sh || :
   wget https://raw.githubusercontent.com/choreonoid/choreonoid/v1.7.0/misc/script/install-requisites-ubuntu-$VERSION_ID.sh -P ./choreonoid/misc/script/
 else
   echo 'Fetching has been skipped since not found.\n'
