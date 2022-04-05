@@ -2,7 +2,7 @@
 set -eu
 
 export GRASP_PLUGINS="Grasp;PRM;GeometryHandler;RobotInterface;ConstraintIK;SoftFingerStability;PCL;GraspDataGen;MotionFile"
-export GRASP_ROBOT_MODELS_PLUGINS='HIRO/Plugin'
+export GRASP_ROBOT_MODEL_PLUGINS='HIRO/Plugin'
 export CNOID_TAG=${1:-v1.7.0}
 env | grep ROS_DISTRO
 env | grep CNOID_TAG
@@ -41,7 +41,7 @@ source ./choreonoid/misc/script/install-requisites-ubuntu-$VERSION_ID.sh
 echo "Entering build-choreonoid/...\n"
 mkdir ./build-choreonoid && cd ./build-choreonoid
 cmake ../choreonoid -DGRASP_PLUGINS=$GRASP_PLUGINS \
--DGRASP_ROBOT_MODELS_PLUGINS=$GRASP_ROBOT_MODELS_PLUGINS \
+-DGRASP_ROBOT_MODEL_PLUGINS=$GRASP_ROBOT_MODEL_PLUGINS \
 -DBUILD_GRASP_PCL_PLUGIN=ON \
 -DUSE_QT5=ON
 LIBRARY_PATH=/opt/ros/${ROS_DISTRO}/lib make -j`nproc` -k && cd ..

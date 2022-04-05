@@ -15,7 +15,7 @@ on:
 
 jobs:
   orig:
-    name: graspPlugin(original, kinetic)
+    name: graspPlugin(original)
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -35,8 +35,10 @@ jobs:
       - name: Install dependencies
         run: |
           apt update
-          apt install -y wget ros-${{ matrix.rosdistro }}-openrtm-aist ros-${{ matrix.rosdistro }}-openrtm-aist-python libpcl-dev
+          apt install -y wget
+          rosdep update --include-eol-distros
+          source /opt/ros/${{ matrix.rosdistro }}/setup.bash && rosdep install  -y -i -q --from-paths overlay_ws/src/grasp_plugin_meta
       - name: Execute setup_choreonoid.sh
         shell: bash
-        run: source ./rtm_entrypoint.sh && cd .. && ./hlab-nxo-setup/setup_choreonoid.sh ${{ matrix.cnoid_tag }}
+        run: source /opt/ros/${{ matrix.rosdistro }}/setup.bash && cd .. && ./hlab-nxo-setup/setup_choreonoid.sh ${{ matrix.cnoid_tag }}
       
