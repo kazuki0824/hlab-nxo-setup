@@ -14,18 +14,18 @@ sleep 3
 
 
 if [ ! -d ./hlab-nxo-setup ]; then
-  echo "./hlab-nxo-setup not found.\n"
+  echo "./hlab-nxo-setup not found."
   exit 1
 fi
 if [ ! -d ./grasp-plugin ]; then
-  echo "./grasp-plugin not found. Please clone it first.\n"
+  echo "./grasp-plugin not found. Please clone it first."
   exit 1
 fi
 
 git clone https://github.com/choreonoid/choreonoid.git --depth 1 -b $CNOID_TAG
 
 ln -s `readlink -f ./grasp-plugin` ./choreonoid/ext/graspPlugin
-echo "Ubuntu $VERSION_ID is selected. Installing dependencies...\n"
+echo "Ubuntu $VERSION_ID is selected. Installing dependencies..."
 
 
 wget --spider https://raw.githubusercontent.com/choreonoid/choreonoid/v1.7.0/misc/script/install-requisites-ubuntu-$VERSION_ID.sh
@@ -33,22 +33,22 @@ if [ $? -eq 0 ]; then
   rm ./choreonoid/misc/script/install-requisites-ubuntu-$VERSION_ID.sh || :
   wget https://raw.githubusercontent.com/choreonoid/choreonoid/v1.7.0/misc/script/install-requisites-ubuntu-$VERSION_ID.sh -P ./choreonoid/misc/script/
 else
-  echo 'Fetching has been skipped since not found.\n'
+  echo 'Fetching has been skipped since not found.'
 fi
 source ./choreonoid/misc/script/install-requisites-ubuntu-$VERSION_ID.sh
 
 
-echo "Entering build-choreonoid/...\n"
+echo "Entering build-choreonoid/..."
 mkdir ./build-choreonoid && cd ./build-choreonoid
 cmake ../choreonoid -DGRASP_PLUGINS=$GRASP_PLUGINS \
 -DGRASP_ROBOT_MODEL_PLUGINS=$GRASP_ROBOT_MODEL_PLUGINS \
 -DBUILD_GRASP_PCL_PLUGIN=ON \
 -DUSE_QT5=ON
 LIBRARY_PATH=/opt/ros/${ROS_DISTRO}/lib make -j`nproc` -k && cd ..
-echo "Leaving build-choreonoid/...\n"
+echo "Leaving build-choreonoid/..."
 
 
-echo "Regenerate IDL...\n"
+echo "Regenerate IDL..."
 ARRAY[0]="hlab-nxo-setup/externals/hironx-interface/HiroNXInterface/HiroNXGUI/HIROController.idl"
 ARRAY[1]="hlab-nxo-setup/externals/hironx-interface/HiroNXInterface/HiroNXGUI/HiroNX.idl"
 ARRAY[2]="choreonoid/ext/graspPlugin/RobotInterface/Nextage/NextageInterface/HIROController.idl"
