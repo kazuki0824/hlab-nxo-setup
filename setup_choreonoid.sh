@@ -49,14 +49,15 @@ echo "Leaving build-choreonoid/..."
 
 
 echo "Regenerate IDL..."
-ARRAY[0]="hlab-nxo-setup/externals/hironx-interface/HiroNXInterface/HiroNXGUI/HIROController.idl"
-ARRAY[1]="hlab-nxo-setup/externals/hironx-interface/HiroNXInterface/HiroNXGUI/HiroNX.idl"
-ARRAY[2]="choreonoid/ext/graspPlugin/RobotInterface/Nextage/NextageInterface/HIROController.idl"
-ARRAY[3]="choreonoid/ext/graspPlugin/RobotInterface/Nextage/NextageInterface/HiroNX.idl"
-ARRAY[4]="choreonoid/ext/graspPlugin/RobotInterface/Nextage/PortDuplicator/HIROController.idl"
-ARRAY[5]="choreonoid/ext/graspPlugin/RobotInterface/Nextage/PortDuplicator/HiroNX.idl"
-ARRAY[6]="choreonoid/ext/graspPlugin/RobotInterface/Nextage/THK/HIROController.idl"
-ARRAY[7]="choreonoid/ext/graspPlugin/RobotInterface/Nextage/THK/HiroNX.idl"
+ARRAY[0]="choreonoid/ext/graspPlugin/RobotInterface/Nextage/NextageInterface/HIROController.idl"
+ARRAY[1]="choreonoid/ext/graspPlugin/RobotInterface/Nextage/NextageInterface/HiroNX.idl"
+ARRAY[2]="choreonoid/ext/graspPlugin/RobotInterface/Nextage/PortDuplicator/HIROController.idl"
+ARRAY[3]="choreonoid/ext/graspPlugin/RobotInterface/Nextage/PortDuplicator/HiroNX.idl"
+ARRAY[4]="choreonoid/ext/graspPlugin/RobotInterface/Nextage/THK/HIROController.idl"
+ARRAY[5]="choreonoid/ext/graspPlugin/RobotInterface/Nextage/THK/HiroNX.idl"
+
+#ARRAY[6]="hlab-nxo-setup/externals/hironx-interface/HiroNXInterface/HiroNXGUI/HIROController.idl"
+#ARRAY[7]="hlab-nxo-setup/externals/hironx-interface/HiroNXInterface/HiroNXGUI/HiroNX.idl"
 
 for item in ${ARRAY[@]}
 do
