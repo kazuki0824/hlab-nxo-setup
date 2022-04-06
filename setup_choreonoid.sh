@@ -4,9 +4,19 @@ set -eu
 export GRASP_PLUGINS="Grasp;PRM;GeometryHandler;RobotInterface;ConstraintIK;SoftFingerStability;PCL;GraspDataGen;MotionFile"
 export GRASP_ROBOT_MODEL_PLUGINS='HIRO/Plugin'
 export CNOID_TAG=${1:-v1.7.0}
+if [ $CNOID_TAG = "v1.7.0" ]; then
+  export USE_PYTHON3="ON"
+  export USE_PYBIND11="ON"
+else
+  export USE_PYTHON3="OFF"
+  export USE_PYBIND11="OFF"  
+fi
 env | grep ROS_DISTRO
 env | grep CNOID_TAG
 env | grep GRASP
+env | grep USE
+
+
 . /etc/os-release
 echo "Ubuntu $VERSION_ID is selected."
 sleep 3
@@ -44,7 +54,9 @@ mkdir ./build-choreonoid && cd ./build-choreonoid
 cmake ../choreonoid -DGRASP_PLUGINS=$GRASP_PLUGINS \
 -DGRASP_ROBOT_MODEL_PLUGINS=$GRASP_ROBOT_MODEL_PLUGINS \
 -DBUILD_GRASP_PCL_PLUGIN=ON \
--DUSE_QT5=ON
+-DUSE_QT5=ON \
+-DUSE_PYTHON3=$USE_PYTHON3 \
+-DUSE_PYBIND11=$USE_PYBIND11
 LIBRARY_PATH=/opt/ros/${ROS_DISTRO}/lib make -j`nproc` -k && cd ..
 echo "Leaving build-choreonoid/..."
 
