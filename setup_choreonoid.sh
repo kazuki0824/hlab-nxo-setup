@@ -8,10 +8,14 @@ if [ $CNOID_TAG = "v1.7.0" ]; then
   export USE_QT5="ON"
   export USE_PYTHON3="ON"
   export USE_PYBIND11="ON"
-else
+elif [ $CNOID_TAG = "v1.6.0" ]; then
+  export USE_QT5="ON"
+  export USE_PYTHON3="OFF"
+  export USE_PYBIND11="OFF"
+elif [ $CNOID_TAG = "v1.5.0" ]; then
   export USE_QT5="OFF"
   export USE_PYTHON3="OFF"
-  export USE_PYBIND11="OFF"  
+  export USE_PYBIND11="OFF"
 fi
 env | grep ROS_DISTRO
 env | grep CNOID_TAG
