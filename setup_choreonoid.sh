@@ -1,6 +1,7 @@
 #!/bin/bash
 set -eu
 
+# Compatibility
 export GRASP_PLUGINS="Grasp;PRM;GeometryHandler;RobotInterface;ConstraintIK;SoftFingerStability;PCL;GraspDataGen;MotionFile"
 export GRASP_ROBOT_MODEL_PLUGINS='HIRO/Plugin'
 export CNOID_TAG=${1:-v1.7.0}
@@ -8,12 +9,12 @@ if [ $CNOID_TAG = "v1.7.0" ]; then
   export USE_QT5="ON"
   export USE_PYTHON3="ON"
   export USE_PYBIND11="ON"
-elif [ $CNOID_TAG = "v1.6.0" ]; then
-  export USE_QT5="ON"
+elif [   ${ROS_DISTRO} = "indigo"  ]; then
+  export USE_QT5="OFF"
   export USE_PYTHON3="OFF"
   export USE_PYBIND11="OFF"
-elif [ $CNOID_TAG = "v1.5.0" ]; then
-  export USE_QT5="OFF"
+else
+  export USE_QT5="ON"
   export USE_PYTHON3="OFF"
   export USE_PYBIND11="OFF"
 fi
@@ -51,8 +52,16 @@ else
 fi
 source ./choreonoid/misc/script/install-requisites-ubuntu-$VERSION_ID.sh
 
+# Compatibility
 if [  ${ROS_DISTRO} = "indigo" ]; then
   sudo apt install cmake3 -y
+elif [ $CNOID_TAG = "v1.7.0" ]; then
+  :
+else
+  sed -i -e 's/.def("startTimer", &QObject::startTimer)/.def("startTimer", (int (QObject::*)(int, Qt::TimerType)) &QObject::startTimer)/g' ./choreonoid/src/Base/boostpython/PyQtCore.cpp
+  sed -i -e 's/.def("setInterval", &QTimer::setInterval)/.def("setInterval", (void (QTimer::*)(int)) &QTimer::setInterval)/g' ./choreonoid/src/Base/boostpython/PyQtCore.cpp
+  sed -i -e 's/.def("startTimer", &QObject::startTimer)/.def("startTimer", (int (QObject::*)(int, Qt::TimerType)) &QObject::startTimer)/g' ./choreonoid/src/Base/pybind11/PyQtCore.cpp
+  sed -i -e 's/.def("setInterval", &QTimer::setInterval)/.def("setInterval", (void (QTimer::*)(int)) &QTimer::setInterval)/g' ./choreonoid/src/Base/pybind11/PyQtCore.cpp
 fi
 
 echo "Entering build-choreonoid/..."
