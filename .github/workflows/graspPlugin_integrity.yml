@@ -31,7 +31,7 @@ jobs:
         with:
           lfs: false
       - name: Fetch graspPlugin from original gitlab
-        run: git clone http://${{ secrets.GRASPPLUGIN_CRED_USER }}:${{ secrets.GRASPPLUGIN_CRED_PASS }}@spica.ms.t.kanazawa-u.ac.jp/gitlab/tsuji/grasp-plugin.git --depth 1 -b modernization_proposal ../grasp-plugin
+        run: git clone http://${{ secrets.GRASPPLUGIN_CRED_USER }}:${{ secrets.GRASPPLUGIN_CRED_PASS }}@spica.ms.t.kanazawa-u.ac.jp/gitlab/tsuji/grasp-plugin.git --depth 1 -b pcl-python-bindings ../grasp-plugin
       - name: Install dependencies
         shell: bash
         run: |
