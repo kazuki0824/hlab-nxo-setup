@@ -40,12 +40,13 @@ cd hlab-nxo-setup
 docker build . --build-arg DISTRIBUTION=<your_distro_name>
 ```
 
+
 ### Usage
 #### First time
 1. 
 ```bash
 xhost +local:user && \
-docker run --name grasp --gpus all -it -e DISPLAY=unix$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix ghcr.io/kazuki0824/hlab-nxo-setup:melodic && \
+docker run --name grasp --gpus all --net host -it -e DISPLAY=unix$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix ghcr.io/kazuki0824/hlab-nxo-setup:melodic && \
 xhost -local:user
 ```
 2. ```git clone http://spica.ms.t.kanazawa-u.ac.jp/gitlab/tsuji/grasp-plugin.git -b <branch>``` and enter your credential.
@@ -56,13 +57,15 @@ https://github.com/kazuki0824/hlab-nxo-setup/blob/de4e6b07d41c6105e34efb9b2fae41
 hlab-nxo-setup/setup_choreonoid.sh <tag>
 ```
 
-To build Choreonoid manually, follow [this](https://gist.github.com/kazuki0824/68b4cc31a545bb71d6af11322545236b) 
+To build Choreonoid manually, follow [this](https://gist.github.com/kazuki0824/68b4cc31a545bb71d6af11322545236b).
 
 #### Later
 ```bash
+docker start grasp && \
 xhost +local:user && \
-docker run --gpus all -it -e DISPLAY=unix$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix grasp && \
-xhost -local:user
+docker exec -it -e DISPLAY=unix$DISPLAY grasp /rtm_entrypoint.sh bash && \
+xhost -local:user && \
+docker stop grasp
 ```
 
 And then run:
@@ -74,4 +77,7 @@ gnome-terminal --window -e "bash -c \"sleep 3; ./hlab-nxo-setup/externals/eclips
 --tab -e "bash -c \" cd ./choreonoid/ext/graspPlugin/RobotInterface/Nextage/NextageInterface; ./HiroNXProvider.py;exec bash\"" \
 --tab -e "bash -c \" ./hlab-nxo-setup/externals/hironx-interface/HiroNXInterface/HiroNXGUI/WxHiroNXGUI.py; exec bash\"" 
 ```
+
+#### Troubleshooter
+Use ```rtfind```
 
