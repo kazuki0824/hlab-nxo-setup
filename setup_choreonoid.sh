@@ -50,6 +50,7 @@ if [ $? -eq 0 ]; then
 else
   echo 'Fetching has been skipped since not found.'
 fi
+sleep 2
 source ./choreonoid/misc/script/install-requisites-ubuntu-$VERSION_ID.sh
 
 # Compatibility
@@ -58,10 +59,11 @@ if [  ${ROS_DISTRO} = "indigo" ]; then
 elif [ $CNOID_TAG = "v1.7.0" ]; then
   :
 else
-  sed -i -e 's/.def("startTimer", &QObject::startTimer)/.def("startTimer", (int (QObject::*)(int, Qt::TimerType)) &QObject::startTimer)/g' ./choreonoid/src/Base/boostpython/PyQtCore.cpp
-  sed -i -e 's/.def("setInterval", &QTimer::setInterval)/.def("setInterval", (void (QTimer::*)(int)) &QTimer::setInterval)/g' ./choreonoid/src/Base/boostpython/PyQtCore.cpp
-  sed -i -e 's/.def("startTimer", &QObject::startTimer)/.def("startTimer", (int (QObject::*)(int, Qt::TimerType)) &QObject::startTimer)/g' ./choreonoid/src/Base/pybind11/PyQtCore.cpp
-  sed -i -e 's/.def("setInterval", &QTimer::setInterval)/.def("setInterval", (void (QTimer::*)(int)) &QTimer::setInterval)/g' ./choreonoid/src/Base/pybind11/PyQtCore.cpp
+  echo "Patching the following file(s):"
+  find ./choreonoid/src -name 'PyQtCore.cpp'
+  find ./choreonoid/src -name 'PyQtCore.cpp' | xargs sed -i 's/.def("startTimer", \&QObject::startTimer)/.def("startTimer", (int (QObject::*)(int, Qt::TimerType)) \&QObject::startTimer)/g'
+  find ./choreonoid/src -name 'PyQtCore.cpp' | xargs sed -i 's/.def("setInterval", \&QTimer::setInterval)/.def("setInterval", (void (QTimer::*)(int)) \&QTimer::setInterval)/g'
+  sleep 2
 fi
 
 echo "Entering build-choreonoid/..."
@@ -72,7 +74,7 @@ cmake ../choreonoid -DGRASP_PLUGINS=$GRASP_PLUGINS \
 -DUSE_QT5=$USE_QT5 \
 -DUSE_PYTHON3=$USE_PYTHON3 \
 -DUSE_PYBIND11=$USE_PYBIND11
-LIBRARY_PATH=/opt/ros/${ROS_DISTRO}/lib make -j`nproc` -k && cd ..
+LIBRARY_PATH=/opt/ros/${ROS_DISTRO}/lib make -j`nproc` && cd ..
 echo "Leaving build-choreonoid/..."
 
 
@@ -83,9 +85,8 @@ ARRAY[2]="choreonoid/ext/graspPlugin/RobotInterface/Nextage/PortDuplicator/HIROC
 ARRAY[3]="choreonoid/ext/graspPlugin/RobotInterface/Nextage/PortDuplicator/HiroNX.idl"
 ARRAY[4]="choreonoid/ext/graspPlugin/RobotInterface/Nextage/THK/HIROController.idl"
 ARRAY[5]="choreonoid/ext/graspPlugin/RobotInterface/Nextage/THK/HiroNX.idl"
-
-#ARRAY[6]="hlab-nxo-setup/externals/hironx-interface/HiroNXInterface/HiroNXGUI/HIROController.idl"
-#ARRAY[7]="hlab-nxo-setup/externals/hironx-interface/HiroNXInterface/HiroNXGUI/HiroNX.idl"
+ARRAY[6]="hlab-nxo-setup/externals/hironx-interface/HiroNXInterface/HiroNXGUI/HIROController.idl"
+ARRAY[7]="hlab-nxo-setup/externals/hironx-interface/HiroNXInterface/HiroNXGUI/HiroNX.idl"
 
 for item in ${ARRAY[@]}
 do
