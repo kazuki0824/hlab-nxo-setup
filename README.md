@@ -7,7 +7,7 @@
 ### Nextage, ROS, OpenRTP
 1. Clone this recursively ```git clone https://github.com/kazuki0824/hlab-nxo-setup.git --depth 1 --recursive```
    <!--Get some large contents by running ```cd hlab-nxo-setup && git lfs pull```-->
-2. Enter externals/, and then run ```./install_RTP.sh```
+2. Enter externals/, and then run ```sudo apt install curl -y &&./install_RTP.sh```
 3. Install ROS1 by following [this](INSTALL_ROS.md) instruction 
 4. Enter overlay\_ws/, and run ```ROS_DISTRO=<your_distro> ./setup_rtmros_ws.sh```
 5. ```source /opt/preinstalled/setup.bash```
@@ -16,7 +16,7 @@
 1. Move the current directory to the location where hlab-nxo-setup is located. (i.e., out of 'hlab-nxo-setup')
 2. Install wget from apt. ```sudo apt install wget```
 3. Clone the graspPlugin repository in the same directory where hlab-nxo-setup is located. At this time, the name of the cloned directory should be 'grasp-plugin'.
-4. Run ```hlab-nxo-setup/setup-choreonoid.sh <tag_name_of_cnoid>```. The tested <tag_name_of_cnoid> value sets are v1.7.0, v1.6.0, and v1.5.0.
+4. Run ```hlab-nxo-setup/setup_choreonoid.sh <tag_name_of_cnoid>```. The tested <tag_name_of_cnoid> value sets are v1.7.0, v1.6.0, and v1.5.0.
 
 ### Get ready
 ```bash
@@ -24,6 +24,7 @@ sudo apt install cmake-qt-gui gnome-terminal dbus-x11 -y
 ```
 And then run 
 ```bash
+rtm-naming
 gnome-terminal --window -e "bash -c \"sleep 3; ./hlab-nxo-setup/externals/eclipse/eclipse -debug -console; exec bash\"" \
 --tab -e "bash -c \" ./build-choreonoid/bin/choreonoid; exec bash\"" \
 --tab -e "bash -c \" ./choreonoid/ext/graspPlugin/RobotInterface/Nextage/THK/HandManipProvider.py; exec bash\"" \

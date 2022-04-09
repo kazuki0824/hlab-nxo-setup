@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eu
+set -u
 
 # Compatibility
 export GRASP_PLUGINS="Grasp;PRM;GeometryHandler;RobotInterface;ConstraintIK;SoftFingerStability;PCL;GraspDataGen;MotionFile"

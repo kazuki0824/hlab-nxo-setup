@@ -48,9 +48,10 @@ unzip -j -d ../eclipse/dropins openrtp-*.zip
 if [ $IN_BUILD -ne 0 ]; then
   cd .. && rm -r OpenRTP-aist
 else
-  cd .. && sudo rm -r OpenRTP-aist
-  sudo apt purge $PKGS --auto-remove
+  cd ..
+  sudo apt purge $PKGS --auto-remove -y
   sudo apt install openjdk-8-jre -y --no-install-recommends
   sudo update-java-alternatives -s java-1.8.0-openjdk-amd64
+  sudo rm -r OpenRTP-aist
 fi
 
