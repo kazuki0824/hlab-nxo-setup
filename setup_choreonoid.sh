@@ -90,11 +90,15 @@ ARRAY[7]="hlab-nxo-setup/externals/hironx-interface/HiroNXInterface/HiroNXGUI/Hi
 
 for item in ${ARRAY[@]}
 do
-  P=`pwd`
-  NAME=`basename $item`
-  echo "Entering `dirname $item`..."
-  cd $(readlink -f `dirname $item`)
-  omniidl -bpython -v $NAME
-  cd $P
+  if [ -f $item ]; then
+    P=`pwd`
+    NAME=`basename $item`
+    echo "Entering `dirname $item`..."
+    cd $(readlink -f `dirname $item`)
+    omniidl -bpython -v $NAME
+    cd $P
+  else
+    echo "$item not found."
+  fi
 done
 
