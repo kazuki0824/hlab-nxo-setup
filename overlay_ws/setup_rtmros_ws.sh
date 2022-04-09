@@ -36,7 +36,7 @@ cd ../..
 if [ $IN_BUILD -eq 0 ] && [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
     sudo rosdep init
 fi
-rosdep update --include-eol-distros && rosdep install -y -i --from-paths src
+rosdep update --include-eol-distros && rosdep install -y -q -i --from-paths src
 catkin config --install
 catkin b --no-status --summarize
 ## Since the initial pose is modified, the test case test_setTargetPoseRelative_rpy won't pass, and so testing is masked.
