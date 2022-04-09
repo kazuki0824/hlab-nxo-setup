@@ -36,7 +36,7 @@ jobs:
         shell: bash
         run: |
           apt update
-          apt install -y wget
+          apt install -y wget -q
           rosdep update --include-eol-distros || :
           source /opt/ros/${{ matrix.rosdistro }}/setup.bash && rosdep install  -y -i -q --from-paths overlay_ws/src/grasp_plugin_meta
       - name: Execute setup_choreonoid.sh
