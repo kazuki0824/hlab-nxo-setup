@@ -10,7 +10,7 @@
 2. Enter externals/, and then run ```sudo apt install curl -y &&./install_RTP.sh```
 3. Install ROS1 by following [this](INSTALL_ROS.md) instruction 
 4. Enter overlay\_ws/, and run ```ROS_DISTRO=<your_distro> ./setup_rtmros_ws.sh```
-5. ```source /opt/preinstalled/setup.bash```
+5. ```source $HOME/.preinstalled/setup.bash```
 
 ### Build choreonoid, graspPlugin
 1. Move the current directory to the location where hlab-nxo-setup is located. (i.e., out of 'hlab-nxo-setup')
@@ -33,6 +33,26 @@ gnome-terminal --window -e "bash -c \"sleep 3; ./hlab-nxo-setup/externals/eclips
 --tab -e "bash -c \" ./hlab-nxo-setup/externals/hironx-interface/HiroNXInterface/HiroNXGUI/WxHiroNXGUI.py; exec bash\"" 
 ```
 
+### Auto-connect
+```bash
+#!/bin/bash
+
+function connect_rtc() {
+    source `rospack find rtshell`/bash_completion
+    #rtcwd /localhost
+    host=/localhost:2809/${HOSTNAME}.host_cxt
+    rtcon $host/HiroNXGUI0.rtc:HiroNX $host/PortDuplicator0.rtc:HiroNX
+    rtcon $host/HiroNXGUI0.rtc:HIRO $host/PortDuplicator0.rtc:HIRO
+    rtcon $host/ArmController0.rtc:HiroNX $host/PortDuplicator0.rtc:HiroNX
+    rtcon $host/ArmController0.rtc:HIRO $host/PortDuplicator0.rtc:HIRO
+    rtcon $host/PortDuplicator0.rtc:HiroNX0 $host/HiroNXProvider0.rtc:HiroNX
+    rtcon $host/PortDuplicator0.rtc:HIRO0 $host/HiroNXProvider0.rtc:HIRO
+    rtcon $host/PortDuplicator0.rtc:HiroNX1 $host/HandManipProvider0.rtc:HiroNX
+    rtcon $host/PortDuplicator0.rtc:HIRO1 $host/HandManipProvider0.rtc:HIRO
+    rtact $host/HiroNXGUI0.rtc $host/HiroNXProvider0.rtc $host/ArmController0.rtc $host/PortDuplicator0.rtc $host/HandManipProvider0.rtc
+}
+
+```
 
 ## How to use (Docker)
 ### Build the Image
@@ -79,6 +99,25 @@ gnome-terminal --window -e "bash -c \"sleep 3; ./hlab-nxo-setup/externals/eclips
 --tab -e "bash -c \" ./hlab-nxo-setup/externals/hironx-interface/HiroNXInterface/HiroNXGUI/WxHiroNXGUI.py; exec bash\"" 
 ```
 
-#### Troubleshooter
-Use ```rtfind```
+## Testing
+To test the operation of HiroNXProvider/HiroNXGUI on a simulation instead of connecting to the actual device, perform the following steps.
 
+1. Rewrite the .robothost file located in HiroNXProvider to the following contents.  
+   localhost:15005
+2. Rewrite the .robotname file located in HiroNXProvider with the following contents.  
+   HiroNX(Robot)0
+3. 
+```bash
+rtm-naming && \
+gnome-terminal --window -e "bash -c \" rtmlaunch nextage_ros_bridge nextage_startup.launch corbaport:=15005 ; exec bash \" " \
+--tab -e "bash -c \" ./build-choreonoid/bin/choreonoid; exec bash\"" \
+--tab -e "bash -c \" ./choreonoid/ext/graspPlugin/RobotInterface/Nextage/THK/HandManipProvider.py; exec bash\"" \
+--tab -e "bash -c \" ./choreonoid/ext/graspPlugin/RobotInterface/Nextage/PortDuplicator/PortDuplicator.py; exec bash\"" \
+--tab -e "bash -c \" cd ./choreonoid/ext/graspPlugin/RobotInterface/Nextage/NextageInterface; ./HiroNXProvider.py;exec bash\"" \
+--tab -e "bash -c \" ./hlab-nxo-setup/externals/hironx-interface/HiroNXInterface/HiroNXGUI/WxHiroNXGUI.py; exec bash\"" && \
+sleep 5 && \
+connect_rtc
+
+```
+
+4. You can control the robot in the hrpsys-simulator through HiroNXGUI and RobotInterface plugin.
