@@ -38,22 +38,17 @@ if [ $IN_BUILD -eq 0 ] && [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list 
 fi
 rosdep update --include-eol-distros && rosdep install -y -q -i --from-paths src
 catkin config --install
-catkin b --no-status --summarize
+catkin b --no-status --summarize --cmake-args -DCMAKE_INSTALL_PREFIX=$HOME/.preinstalled
 ## Since the initial pose is modified, the test case test_setTargetPoseRelative_rpy won't pass, and so testing is masked.
 # catkin test
 
 
-if [ $IN_BUILD -ne 0 ]; then
-    cp -v -r ./install /opt/preinstalled
-else
-    echo "Install files to /opt/preinstalled..."
-    sudo cp -r ./install /opt/preinstalled
-    
+if [ $IN_BUILD -eq 0 ]; then
     cd ..
     read -p "Do you want to add environment setup to ~/.bashrc? (y/N): " yn
     if [[ $yn = [yY] ]]; then
-        echo "source /opt/preinstalled/setup.bash" >> ~/.bashrc
+        echo 'source $HOME/.preinstalled/setup.bash' >> ~/.bashrc
     fi
-    sudo rm -r overlay_ws/
+    rm -r overlay_ws/
 fi
 
