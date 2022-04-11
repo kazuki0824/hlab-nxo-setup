@@ -38,6 +38,13 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     
 RUN apt install -q -y --no-install-recommends cmake-qt-gui gnome-terminal dbus-x11
 
+
+# nvidia-container-runtime
+ENV NVIDIA_VISIBLE_DEVICES \
+    ${NVIDIA_VISIBLE_DEVICES:-all}
+ENV NVIDIA_DRIVER_CAPABILITIES \
+    ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
+
 # It is not intended to use rtm_entrypoint outside the Docker img, so allow execution only in Docker
 RUN chmod +x /rtm_entrypoint.sh
 ENTRYPOINT [ "/rtm_entrypoint.sh" ]
