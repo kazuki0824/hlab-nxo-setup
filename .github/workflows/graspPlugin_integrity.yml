@@ -30,10 +30,13 @@ jobs:
         uses: actions/checkout@v3
         with:
           lfs: false
-      - name: Fetch dependencies from rosinstall
-        if: ${{ matrix.rosdistro == 'noetic' }}
-        run: vcs import overlay_ws/src < overlay_ws/.rosinstall
-
+      # - name: Fetch dependencies from rosinstall
+      #   if: ${{ matrix.rosdistro == 'noetic' }}
+      #   run: vcs import overlay_ws/src < overlay_ws/.rosinstall
+      # - name: Bloom externals
+      #   if: ${{ matrix.rosdistro == 'noetic' }}
+      #   run: |
+      #     bloom-generate rosdebian --ros-distro noetic
       - name: Fetch graspPlugin from original gitlab
         run: git clone http://${{ secrets.GRASPPLUGIN_CRED_USER }}:${{ secrets.GRASPPLUGIN_CRED_PASS }}@spica.ms.t.kanazawa-u.ac.jp/gitlab/tsuji/grasp-plugin.git --depth 1 -b master ../grasp-plugin
       - name: Install dependencies
