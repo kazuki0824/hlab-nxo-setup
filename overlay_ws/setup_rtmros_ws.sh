@@ -34,8 +34,10 @@ git clone https://github.com/start-jsk/rtmros_hironx.git --depth 1 ; \
 set -e
 cd ../..
 if [ $ROS_DISTRO = "noetic" ]; then
-    sudo apt install python3-vcstool -y --no-install-recommends
+    sudo apt install python3-vcstool python3-catkin-tools -y --no-install-recommends
     vcs import src < ./.rosinstall
+else
+    sudo apt install python-catkin-tools -y --no-install-recommends
 fi
 if [ $IN_BUILD -eq 0 ] && [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
     sudo rosdep init
