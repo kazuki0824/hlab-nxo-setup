@@ -1,0 +1,20 @@
+- git: 
+    local-name: rtmros_nextage
+    uri: https://github.com/tork-a/rtmros_nextage.git
+    version: indigo-devel
+- git: 
+    local-name: hrpsys
+    uri: https://github.com/fkanehiro/hrpsys-base
+    version: master
+- git: 
+    local-name: rtmros_common
+    uri: https://github.com/start-jsk/rtmros_common
+    version: indigo-devel
+- git: 
+    local-name: openrtm_aist
+    uri: https://github.com/tork-a/openrtm_aist-release.git
+    version: release/noetic/openrtm_aist
+- git: 
+    local-name: openrtm_aist_python
+    uri: https://github.com/tork-a/openrtm_aist_python-release.git
+    version: release/melodic/openrtm_aist_python

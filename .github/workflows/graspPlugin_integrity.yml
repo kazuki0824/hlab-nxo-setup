@@ -21,7 +21,7 @@ jobs:
       fail-fast: false
       matrix:
         cnoid_tag: [ "v1.7.0", "v1.6.0", "v1.5.0" ]
-        rosdistro: [ "melodic", "kinetic", "indigo" ]
+        rosdistro: [ "noetic", "melodic", "kinetic", "indigo" ]
     container:
       image: ros:${{ matrix.rosdistro }}
 
@@ -30,6 +30,10 @@ jobs:
         uses: actions/checkout@v3
         with:
           lfs: false
+      - name: Fetch dependencies from rosinstall
+        if: ${{ matrix.rosdistro == 'noetic' }}
+        run: vcs import overlay_ws/src < overlay_ws/.rosinstall
+
       - name: Fetch graspPlugin from original gitlab
         run: git clone http://${{ secrets.GRASPPLUGIN_CRED_USER }}:${{ secrets.GRASPPLUGIN_CRED_PASS }}@spica.ms.t.kanazawa-u.ac.jp/gitlab/tsuji/grasp-plugin.git --depth 1 -b master ../grasp-plugin
       - name: Install dependencies

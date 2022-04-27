@@ -33,13 +33,16 @@ git clone https://github.com/start-jsk/rtmros_hironx.git --depth 1 ; \
 
 set -e
 cd ../..
+if [ $ROS_DISTRO = "noetic" ]; then
+    vcs import src < ./.rosinstall
+fi
 if [ $IN_BUILD -eq 0 ] && [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
     sudo rosdep init
 fi
 rosdep update --include-eol-distros && rosdep install -y -q -i --from-paths src
 catkin config --install
 catkin b --no-status --summarize --cmake-args -DCMAKE_INSTALL_PREFIX=$HOME/.preinstalled
-## Since the initial pose is modified, the test case test_setTargetPoseRelative_rpy won't pass, and so testing is masked.
+## Since the initial pose is modified, the test case test_setTargetPoseRelative_rpy won't pass. So testing is masked.
 # catkin test
 
 
