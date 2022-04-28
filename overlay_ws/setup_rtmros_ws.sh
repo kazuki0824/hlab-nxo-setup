@@ -36,6 +36,8 @@ cd ../..
 if [ $ROS_DISTRO = "noetic" ]; then
     sudo apt install python3-vcstool python3-catkin-tools -y --no-install-recommends
     vcs import src < ./.rosinstall
+    sed -i -e 's/orocos_kdl/liborocos_kdl/g' src/rtmros_nextage/nextage_calibration/package.xml
+    sed -i -e 's/python_rosdep/python3_rosdep/g' src/rtmros_common/hrpsys_ros_bridge/package.xml
 else
     sudo apt install python-catkin-tools -y --no-install-recommends
 fi
