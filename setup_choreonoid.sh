@@ -6,7 +6,7 @@ export GRASP_ROBOT_MODEL_PLUGINS='HIRO/Plugin'
 export CNOID_TAG=${1:-v1.7.0}
 
 # Compatibility
-if [ ${ROS_DISTRO} != "noetic" ]
+if [ ${ROS_DISTRO} != "noetic" ]; then
   export GRASP_PLUGINS="${GRASP_PLUGINS};RobotInterface"
 fi
 
