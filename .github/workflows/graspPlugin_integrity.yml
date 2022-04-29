@@ -32,7 +32,9 @@ jobs:
           lfs: false
       - name: Fetch git
         if: ${{ matrix.rosdistro == 'noetic' }}
-        run: apt install git --no-install-recommends -y
+        run: |
+          apt update
+          apt install git --no-install-recommends -y
       - name: Fetch graspPlugin from original gitlab
         run: git clone http://${{ secrets.GRASPPLUGIN_CRED_USER }}:${{ secrets.GRASPPLUGIN_CRED_PASS }}@spica.ms.t.kanazawa-u.ac.jp/gitlab/tsuji/grasp-plugin.git --depth 1 -b master ../grasp-plugin
       - name: Install dependencies
