@@ -35,6 +35,10 @@ jobs:
         run: |
           apt update
           apt install git --no-install-recommends -y
+      - name: Patch dependencies in grasp_plugin_meta
+        if: ${{ matrix.rosdistro == 'noetic' }}
+        run: |
+          sed -i -e 's#<run_depend>openrtm_tools</run_depend>##g' overlay_ws/src/grasp_plugin_meta/package.xml
       - name: Fetch graspPlugin from original gitlab
         run: git clone http://${{ secrets.GRASPPLUGIN_CRED_USER }}:${{ secrets.GRASPPLUGIN_CRED_PASS }}@spica.ms.t.kanazawa-u.ac.jp/gitlab/tsuji/grasp-plugin.git --depth 1 -b master ../grasp-plugin
       - name: Install dependencies
@@ -43,7 +47,7 @@ jobs:
           apt update
           apt install -y wget -q
           rosdep update --include-eol-distros || :
-          source /opt/ros/${{ matrix.rosdistro }}/setup.bash && rosdep install  -y -i -q --from-paths overlay_ws/src/grasp_plugin_meta
+          source /opt/ros/${{ matrix.rosdistro }}/setup.bash && rosdep install  -y -i -q --from-paths overlay_ws/src/grasp_plugin_meta || true
       - name: Execute setup_choreonoid.sh
         shell: bash
         run: source /opt/ros/${{ matrix.rosdistro }}/setup.bash && cd .. && ./hlab-nxo-setup/setup_choreonoid.sh ${{ matrix.cnoid_tag }}
