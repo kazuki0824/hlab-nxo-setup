@@ -33,7 +33,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        rosdistro: [melodic, kinetic, indigo]
+        rosdistro: [noetic, melodic, kinetic, indigo]
 
     steps:
       - name: Checkout repository
