@@ -36,8 +36,13 @@ cd ../..
 if [ $ROS_DISTRO = "noetic" ]; then
     sudo apt install python3-vcstool python3-catkin-tools -y --no-install-recommends
     vcs import src < ./.rosinstall
-    sed -i -e 's/orocos_kdl/liborocos_kdl/g' src/rtmros_nextage/nextage_calibration/package.xml
-    sed -i -e 's/python_rosdep/python3_rosdep/g' src/rtmros_common/hrpsys_ros_bridge/package.xml
+    ## See http://wiki.ros.org/noetic/Migration
+    sed -i -e 's#<run_depend>turtlebot_description</run_depend>##g' src/rtmros_nextage/nextage_calibration/package.xml
+    sed -i -e 's/orocos_kdl/liborocos-kdl/g' src/rtmros_nextage/nextage_calibration/package.xml
+    sed -i -e 's/orocos_kdl/liborocos-kdl/g' src/rtmros_hironx/hironx_calibration/package.xml
+    sed -i -e 's/libpng12-dev/libpng-dev/g' src/openhrp3/package.xml
+    sed -i -e 's/python-rosdep/python3-rosdep/g' src/rtmros_common/hrpsys_ros_bridge/package.xml
+    sed -i -e 's/python-setuptool/python3-setuptool/g' src/openrtm_common/openrtm_aist_python/package.xml
 else
     sudo apt install python-catkin-tools -y --no-install-recommends
 fi
