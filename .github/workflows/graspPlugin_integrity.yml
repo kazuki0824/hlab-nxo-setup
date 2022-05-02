@@ -47,7 +47,7 @@ jobs:
           apt update
           apt install -y wget -q
           rosdep update --include-eol-distros || :
-          source /opt/ros/${{ matrix.rosdistro }}/setup.bash && rosdep install  -y -i -q --from-paths overlay_ws/src/grasp_plugin_meta || true
+          DEBIAN_FRONTEND=noninteractive source /opt/ros/${{ matrix.rosdistro }}/setup.bash && rosdep install  -y -i -q --from-paths overlay_ws/src/grasp_plugin_meta || true
       - name: Execute setup_choreonoid.sh
         shell: bash
         run: source /opt/ros/${{ matrix.rosdistro }}/setup.bash && cd .. && ./hlab-nxo-setup/setup_choreonoid.sh ${{ matrix.cnoid_tag }}
