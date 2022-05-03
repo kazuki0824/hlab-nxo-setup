@@ -17,6 +17,7 @@ jobs:
   orig:
     name: graspPlugin(original)
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
@@ -47,7 +48,7 @@ jobs:
           apt update
           apt install -y wget -q
           rosdep update --include-eol-distros || :
-          DEBIAN_FRONTEND=noninteractive source /opt/ros/${{ matrix.rosdistro }}/setup.bash && rosdep install  -y -i -q --from-paths overlay_ws/src/grasp_plugin_meta || true
+          source /opt/ros/${{ matrix.rosdistro }}/setup.bash && DEBIAN_FRONTEND=noninteractive rosdep install  -y -i -q --from-paths overlay_ws/src/grasp_plugin_meta || true
       - name: Execute setup_choreonoid.sh
         shell: bash
         run: source /opt/ros/${{ matrix.rosdistro }}/setup.bash && cd .. && ./hlab-nxo-setup/setup_choreonoid.sh ${{ matrix.cnoid_tag }}
