@@ -79,9 +79,12 @@ fi
 
 echo "Entering build-choreonoid/..."
 mkdir ./build-choreonoid && cd ./build-choreonoid
+
+set -e
 cmake ../choreonoid -DGRASP_PLUGINS=$GRASP_PLUGINS \
 -DGRASP_ROBOT_MODEL_PLUGINS=$GRASP_ROBOT_MODEL_PLUGINS \
 -DBUILD_GRASP_PCL_PLUGIN=ON \
+-DREAD_PCD_ON=ON \
 -DUSE_QT5=$USE_QT5 \
 -DUSE_PYTHON3=$USE_PYTHON3 \
 -DUSE_PYBIND11=$USE_PYBIND11
