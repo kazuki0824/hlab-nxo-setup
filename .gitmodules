@@ -1,6 +1,6 @@
 [submodule "externals/hironx-interface"]
 	path = externals/hironx-interface
-	url = https://github.com/kensuke-harada/hironx-interface.git
+	url = https://github.com/kazuki0824/hironx-interface.git
 [submodule "externals/OpenRTP-aist"]
 	path = externals/OpenRTP-aist
 	url = https://github.com/OpenRTM/OpenRTP-aist.git
