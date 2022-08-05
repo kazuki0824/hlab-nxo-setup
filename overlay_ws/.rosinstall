@@ -1,8 +1,4 @@
 - git: 
-    local-name: openhrp3
-    uri: https://github.com/fkanehiro/openhrp3.git
-    version: master
-- git: 
     local-name: hrpsys
     uri: https://github.com/fkanehiro/hrpsys-base.git
     version: master
@@ -16,10 +12,6 @@
     uri: https://github.com/start-jsk/rtmros_common
     version: master
 
-- git: 
-    local-name: openrtm_common/openrtm_aist
-    uri: https://github.com/tork-a/openrtm_aist-release.git
-    version: release/noetic/openrtm_aist
 - git: 
     local-name: openrtm_common/openrtm_aist_python
     uri: https://github.com/tork-a/openrtm_aist_python-release.git
