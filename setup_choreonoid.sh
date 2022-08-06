@@ -62,6 +62,8 @@ source ./choreonoid/misc/script/install-requisites-ubuntu-$VERSION_ID.sh
 # Compatibility
 if [  ${ROS_DISTRO} = "indigo" ]; then
   sudo apt install cmake3 -y
+elif [ ${ROS_DISTRO} = "noetic"  ]; then
+  sudo apt install gettext -y
 elif [ $CNOID_TAG = "v1.7.0" ]; then
   :
 else
