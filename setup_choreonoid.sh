@@ -70,6 +70,8 @@ fi
 
 echo "Entering build-choreonoid/..."
 mkdir ./build-choreonoid && cd ./build-choreonoid
+
+set -e
 cmake ../choreonoid -DGRASP_PLUGINS=$GRASP_PLUGINS \
 -DGRASP_ROBOT_MODEL_PLUGINS=$GRASP_ROBOT_MODEL_PLUGINS \
 -DBUILD_GRASP_PCL_PLUGIN=ON \
