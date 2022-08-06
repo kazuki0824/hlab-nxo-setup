@@ -27,7 +27,7 @@ cd src
 . /opt/ros/${ROS_DISTRO:-melodic}/setup.bash
 
 set +e
-git clone https://github.com/start-jsk/rtmros_hironx.git --depth 1 ; \
+git clone https://github.com/kazuki0824/rtmros_hironx.git -b fix/notest --depth 1 ; \
     cd rtmros_hironx && \
     git apply ../initPos.patch
 
