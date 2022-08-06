@@ -9,8 +9,8 @@
     version: indigo-devel
 - git: 
     local-name: rtmros_common
-    uri: https://github.com/start-jsk/rtmros_common.git
-    version: master
+    uri: https://github.com/kazuki0824/rtmros_common.git
+    version: fix/notest
 
 - git: 
     local-name: openrtm_common/openrtm_aist_python

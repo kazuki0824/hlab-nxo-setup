@@ -48,15 +48,17 @@ if [ $ROS_DISTRO = "noetic" ]; then
     sed -i -e 's/python-setuptool/python3-setuptool/g' src/openrtm_common/rtshell/package.xml
     sed -i -e 's/python-setuptool/python3-setuptool/g' src/openrtm_common/rtsprofile/package.xml
     sed -i -e 's/python-setuptool/python3-setuptool/g' src/openrtm_common/rtctree/package.xml
+    export CMAKEARGS="-DUSE_HRPSYSEXT=OFF -DCATKIN_ENABLE_TESTING=OFF"
 else
     sudo apt install python-catkin-tools -y --no-install-recommends
+    export CMAKEARGS="-DCMAKE_INSTALL_PREFIX=$HOME/.preinstalled"
 fi
 if [ $IN_BUILD -eq 0 ] && [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
     sudo rosdep init
 fi
 rosdep update --include-eol-distros && rosdep install -y -q -i --from-paths src
 catkin config --install
-catkin b --no-status --summarize --cmake-args -DENABLE_DOXYGEN=OFF -DCMAKE_INSTALL_PREFIX=$HOME/.preinstalled
+catkin b --no-status --summarize --cmake-args $CMAKEARGS
 ## Since the initial pose is modified, the test case test_setTargetPoseRelative_rpy won't pass. So testing is masked.
 # catkin test
 
