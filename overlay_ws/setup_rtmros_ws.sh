@@ -54,6 +54,7 @@ if [ $ROS_DISTRO = "noetic" ]; then
     export PKGNAME=""
     if [ $CI -eq 1 ]; then
         export NOETIC_CI=1
+        export DEBIAN_FRONTEND=noninteractive
         export PKGNAME=grasp_plugin-meta
     fi
 else
