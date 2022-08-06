@@ -36,7 +36,7 @@ cd ../..
 if [ $ROS_DISTRO = "noetic" ]; then
     ## See https://github.com/fkanehiro/hrpsys-base/blob/2336d264de48625a914a5edcb2063343f69a0b47/util/simulator/CMakeLists.txt#L35
     sudo apt install libboost-python-dev -y --no-install-recommends
-    sudo apt install python3-vcstool python3-catkin-tools -y --no-install-recommends
+    sudo apt install python3-vcstool python3-catkin-tools python-is-python2 -y --no-install-recommends
     vcs import src < ./noetic.rosinstall
     ## See http://wiki.ros.org/noetic/Migration
     sed -i -e 's#<run_depend>turtlebot_description</run_depend>##g' src/rtmros_nextage/nextage_calibration/package.xml
