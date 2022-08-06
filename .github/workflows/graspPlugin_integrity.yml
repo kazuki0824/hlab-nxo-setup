@@ -17,8 +17,8 @@ jobs:
   orig:
     name: graspPlugin(original)
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     strategy:
-      timeout-minutes: 60
       fail-fast: false
       matrix:
         cnoid_tag: [ "v1.7.0", "v1.6.0", "v1.5.0" ]

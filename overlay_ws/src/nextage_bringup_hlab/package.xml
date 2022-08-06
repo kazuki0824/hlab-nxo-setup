@@ -13,8 +13,8 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <run_depend>rtmros_nextage</run_depend>
-  <run_depend>rtmros_hironx</run_depend>
+  <depend>rtmros_nextage</depend>
+  <depend>rtmros_hironx</depend>
 
   <export>
     <metapackage/>
