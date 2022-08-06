@@ -51,8 +51,10 @@ if [ $ROS_DISTRO = "noetic" ]; then
     ## Workarounds for noetic. If CMAKE_INSTALL_PREFIX is modified ar_track_alvar can't find its message package. This has to be fixed.
     export CMAKEARGS="-DUSE_HRPSYSEXT=OFF -DCATKIN_ENABLE_TESTING=OFF -DENABLE_DOXYGEN=OFF"
     
+    export PKGNAME=""
     if [ $CI -eq 1 ]; then
         export NOETIC_CI=1
+        export PKGNAME=grasp_plugin-meta
     fi
 else
     sudo apt install python-catkin-tools -y --no-install-recommends
@@ -63,7 +65,7 @@ if [ $IN_BUILD -eq 0 ] && [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list 
 fi
 rosdep update --include-eol-distros && rosdep install -y -q -i --from-paths src
 catkin config --install
-catkin b --no-status --summarize --cmake-args $CMAKEARGS
+catkin b $PKGNAME --no-status --summarize --cmake-args $CMAKEARGS
 ## Since the initial pose is modified, the test case test_setTargetPoseRelative_rpy won't pass. So testing is masked.
 # catkin test
 
