@@ -63,7 +63,7 @@ source ./choreonoid/misc/script/install-requisites-ubuntu-$VERSION_ID.sh
 if [  ${ROS_DISTRO} = "indigo" ]; then
   sudo apt install cmake3 -y
 elif [ ${ROS_DISTRO} = "noetic"  ]; then
-  sudo apt install gettext -y
+  sudo apt install gettext python-is-python2 -y
 elif [ $CNOID_TAG = "v1.7.0" ]; then
   :
 else
