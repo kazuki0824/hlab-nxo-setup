@@ -12,12 +12,12 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <depend>glut</depend>
-  <depend>libglew-dev</depend>
-  <depend>liblapack-dev</depend>
-  <depend>openrtm_tools</depend>
-  <depend>pcl_ros</depend>
-  <depend>gettext-base</depend>
+  <run_depend>glut</run_depend>
+  <run_depend>libglew-dev</run_depend>
+  <run_depend>liblapack-dev</run_depend>
+  <run_depend>openrtm_tools</run_depend>
+  <run_depend>pcl_ros</run_depend>
+  <run_depend>gettext-base</run_depend>
 
   <export>
     <metapackage/>
