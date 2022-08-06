@@ -31,7 +31,7 @@
 
 - git:
     local-name: ar_track_alvar
-    uri: https://github.com/ros-perception/ar_track_alvar.git
+    uri: https://github.com/machinekoder/ar_track_alvar.git
     version: noetic-devel
 - git:
     uri: https://github.com/ros-drivers/freenect_stack.git

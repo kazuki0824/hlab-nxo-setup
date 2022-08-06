@@ -35,7 +35,7 @@ set -e
 cd ../..
 if [ $ROS_DISTRO = "noetic" ]; then
     sudo apt install python3-vcstool python3-catkin-tools -y --no-install-recommends
-    vcs import src < ./.rosinstall
+    vcs import src < ./noetic.rosinstall
     ## See http://wiki.ros.org/noetic/Migration
     sed -i -e 's#<run_depend>turtlebot_description</run_depend>##g' src/rtmros_nextage/nextage_calibration/package.xml
     sed -i -e 's/orocos_kdl/liborocos-kdl/g' src/rtmros_nextage/nextage_calibration/package.xml
