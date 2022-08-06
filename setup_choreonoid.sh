@@ -9,10 +9,6 @@ if [ $CNOID_TAG = "v1.7.0" ]; then
   export USE_QT5="ON"
   export USE_PYTHON3="ON"
   export USE_PYBIND11="ON"
-elif [ ${ROS_DISTRO} = "noetic"  ]; then
-  export USE_QT5="ON"
-  export USE_PYTHON3="ON"
-  export USE_PYBIND11="ON"
 elif [   ${ROS_DISTRO} = "indigo"  ]; then
   export USE_QT5="OFF"
   export USE_PYTHON3="OFF"
@@ -85,7 +81,8 @@ cmake ../choreonoid -DGRASP_PLUGINS=$GRASP_PLUGINS \
 -DUSE_QT5=$USE_QT5 \
 -DUSE_PYTHON3=$USE_PYTHON3 \
 -DUSE_PYBIND11=$USE_PYBIND11
-LIBRARY_PATH=/opt/ros/${ROS_DISTRO}/lib make -j`nproc` && cd ..
+LIBRARY_PATH=/opt/ros/${ROS_DISTRO}/lib make -j`nproc`
+cd ..
 echo "Leaving build-choreonoid/..."
 
 
