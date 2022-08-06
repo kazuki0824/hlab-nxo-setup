@@ -1,0 +1,44 @@
+- git: 
+    local-name: hrpsys
+    uri: https://github.com/fkanehiro/hrpsys-base.git
+    version: master
+
+- git: 
+    local-name: rtmros_nextage
+    uri: https://github.com/tork-a/rtmros_nextage.git
+    version: indigo-devel
+- git: 
+    local-name: rtmros_common
+    uri: https://github.com/kazuki0824/rtmros_common.git
+    version: fix/notest
+
+- git: 
+    local-name: openrtm_common/openrtm_aist_python
+    uri: https://github.com/tork-a/openrtm_aist_python-release.git
+    version: release/melodic/openrtm_aist_python
+- git:
+    local-name: openrtm_common/rtshell
+    uri: https://github.com/tork-a/rtshell-release.git
+    version: debian/melodic/rtshell
+- git:
+    local-name: openrtm_common/rtsprofile
+    uri: https://github.com/tork-a/rtsprofile-release.git
+    version: debian/melodic/rtsprofile
+- git:
+    local-name: openrtm_common/rtctree
+    uri: https://github.com/tork-a/rtctree-release.git
+    version: debian/melodic/rtctree
+
+- git:
+    local-name: ar_track_alvar
+    uri: https://github.com/machinekoder/ar_track_alvar.git
+    version: noetic-devel
+- git:
+    uri: https://github.com/ros-drivers/freenect_stack.git
+    local-name: freenect_stack
+    version: master
+- git:
+    uri: https://github.com/anqixu/ueye_cam.git
+    local-name: ueye_cam
+    version: master
+    

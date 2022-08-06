@@ -13,7 +13,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt update && \
-    apt install -y --no-install-recommends -q git python-catkin-tools wget
+    apt install -y --no-install-recommends -q git wget
 
 COPY ./overlay_ws/ /tmp/overlay_ws/
 WORKDIR /tmp/overlay_ws

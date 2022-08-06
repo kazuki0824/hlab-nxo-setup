@@ -21,24 +21,43 @@ jobs:
       fail-fast: false
       matrix:
         cnoid_tag: [ "v1.7.0", "v1.6.0", "v1.5.0" ]
-        rosdistro: [ "melodic", "kinetic", "indigo" ]
+        rosdistro: [ "noetic", "melodic", "kinetic", "indigo" ]
     container:
       image: ros:${{ matrix.rosdistro }}
 
     steps:
+      - name: Install git
+        run: |
+          apt update
+          apt install git -yq
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           lfs: false
+      # - name: Fetch dependencies from rosinstall
+      #   if: ${{ matrix.rosdistro == 'noetic' }}
+      #   run: vcs import overlay_ws/src < overlay_ws/.rosinstall
+      # - name: Bloom externals
+      #   if: ${{ matrix.rosdistro == 'noetic' }}
+      #   run: |
+      #     bloom-generate rosdebian --ros-distro noetic
       - name: Fetch graspPlugin from original gitlab
         run: git clone http://${{ secrets.GRASPPLUGIN_CRED_USER }}:${{ secrets.GRASPPLUGIN_CRED_PASS }}@spica.ms.t.kanazawa-u.ac.jp/gitlab/tsuji/grasp-plugin.git --depth 1 -b master ../grasp-plugin
-      - name: Install dependencies
+      - name: Install dependencies (non-noetic)
         shell: bash
+        if: ${{ matrix.rosdistro != 'noetic' }}
         run: |
           apt update
           apt install -y wget -q
           rosdep update --include-eol-distros || :
           source /opt/ros/${{ matrix.rosdistro }}/setup.bash && rosdep install  -y -i -q --from-paths overlay_ws/src/grasp_plugin_meta
+      - name: Install dependencies (noetic)
+        shell: bash
+        if: ${{ matrix.rosdistro == 'noetic' }}
+        run: |
+          cd ./overlay_ws
+          CI=1 ./setup_rtmros_ws.sh
+          cd ..
       - name: Execute setup_choreonoid.sh
         shell: bash
         run: source /opt/ros/${{ matrix.rosdistro }}/setup.bash && cd .. && ./hlab-nxo-setup/setup_choreonoid.sh ${{ matrix.cnoid_tag }}
