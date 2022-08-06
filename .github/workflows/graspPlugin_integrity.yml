@@ -21,11 +21,15 @@ jobs:
       fail-fast: false
       matrix:
         cnoid_tag: [ "v1.7.0", "v1.6.0", "v1.5.0" ]
-        rosdistro: [ "melodic", "kinetic", "indigo" ]
+        rosdistro: [ "noetic", "melodic", "kinetic", "indigo" ]
     container:
       image: ros:${{ matrix.rosdistro }}
 
     steps:
+      - name: Install git
+        run: |
+          apt update
+          apt install git -yq
       - name: Checkout repository
         uses: actions/checkout@v3
         with:

@@ -48,7 +48,7 @@ if [ $ROS_DISTRO = "noetic" ]; then
     sed -i -e 's/python-setuptool/python3-setuptool/g' src/openrtm_common/rtshell/package.xml
     sed -i -e 's/python-setuptool/python3-setuptool/g' src/openrtm_common/rtsprofile/package.xml
     sed -i -e 's/python-setuptool/python3-setuptool/g' src/openrtm_common/rtctree/package.xml
-    ## Workarounds for noetic
+    ## Workarounds for noetic. If CMAKE_INSTALL_PREFIX is modified ar_track_alvar can't find its message package. This has to be fixed.
     export CMAKEARGS="-DUSE_HRPSYSEXT=OFF -DCATKIN_ENABLE_TESTING=OFF -DENABLE_DOXYGEN=OFF"
 else
     sudo apt install python-catkin-tools -y --no-install-recommends
