@@ -34,6 +34,8 @@ git clone https://github.com/start-jsk/rtmros_hironx.git --depth 1 ; \
 set -e
 cd ../..
 if [ $ROS_DISTRO = "noetic" ]; then
+    ## See https://github.com/fkanehiro/hrpsys-base/blob/2336d264de48625a914a5edcb2063343f69a0b47/util/simulator/CMakeLists.txt#L35
+    sudo apt install libboost-python-dev -y --no-install-recommends
     sudo apt install python3-vcstool python3-catkin-tools -y --no-install-recommends
     vcs import src < ./noetic.rosinstall
     ## See http://wiki.ros.org/noetic/Migration
@@ -46,7 +48,6 @@ if [ $ROS_DISTRO = "noetic" ]; then
     sed -i -e 's/python-setuptool/python3-setuptool/g' src/openrtm_common/rtshell/package.xml
     sed -i -e 's/python-setuptool/python3-setuptool/g' src/openrtm_common/rtsprofile/package.xml
     sed -i -e 's/python-setuptool/python3-setuptool/g' src/openrtm_common/rtctree/package.xml
-    sed -i -e 's/python)/python38)/g' src/hrpsys/util/simulator/CMakeLists.txt
 else
     sudo apt install python-catkin-tools -y --no-install-recommends
 fi

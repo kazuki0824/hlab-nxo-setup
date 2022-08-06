@@ -1,7 +1,7 @@
 - git: 
     local-name: hrpsys
-    uri: https://github.com/tork-a/hrpsys-release.git
-    version: debian/melodic/hrpsys
+    uri: https://github.com/fkanehiro/hrpsys-base.git
+    version: master
 
 - git: 
     local-name: rtmros_nextage
