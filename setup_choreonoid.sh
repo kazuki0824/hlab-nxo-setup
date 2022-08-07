@@ -5,14 +5,13 @@ set -u
 export GRASP_PLUGINS="Grasp;PRM;GeometryHandler;RobotInterface;ConstraintIK;SoftFingerStability;PCL;GraspDataGen;MotionFile"
 export GRASP_ROBOT_MODEL_PLUGINS='HIRO/Plugin'
 export CNOID_TAG=${1:-v1.7.0}
-if [ $CNOID_TAG = "v1.5.0" ]; then
-  export USE_QT5="ON"
-  export ENABLE_PYTHON="ON"
+
+if [ ${ROS_DISTRO} = "indigo" ]; then
+  export USE_QT5="OFF"
   export USE_PYTHON3="OFF"
   export USE_PYBIND11="OFF"
-fi
-if [   ${ROS_DISTRO} = "indigo"  ]; then
-  export USE_QT5="OFF"
+elif [ $CNOID_TAG = "v1.5.0" ]; then
+  export USE_QT5="ON"
   export USE_PYTHON3="OFF"
   export USE_PYBIND11="OFF"
 else
