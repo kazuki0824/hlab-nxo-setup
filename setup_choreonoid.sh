@@ -10,6 +10,7 @@ if [ $CNOID_TAG = "v1.5.0" ]; then
   export ENABLE_PYTHON="ON"
   export USE_PYTHON3="OFF"
   export USE_PYBIND11="OFF"
+fi
 if [   ${ROS_DISTRO} = "indigo"  ]; then
   export USE_QT5="OFF"
   export USE_PYTHON3="OFF"
