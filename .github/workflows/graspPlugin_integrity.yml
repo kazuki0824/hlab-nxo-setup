@@ -17,6 +17,7 @@ jobs:
   orig:
     name: graspPlugin(original)
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
@@ -42,7 +43,7 @@ jobs:
       #   run: |
       #     bloom-generate rosdebian --ros-distro noetic
       - name: Fetch graspPlugin from original gitlab
-        run: git clone http://${{ secrets.GRASPPLUGIN_CRED_USER }}:${{ secrets.GRASPPLUGIN_CRED_PASS }}@spica.ms.t.kanazawa-u.ac.jp/gitlab/tsuji/grasp-plugin.git --depth 1 -b master ../grasp-plugin
+        run: git clone http://${{ secrets.GRASPPLUGIN_CRED_USER }}:${{ secrets.GRASPPLUGIN_CRED_PASS }}@spica.ms.t.kanazawa-u.ac.jp/gitlab/tsuji/grasp-plugin.git --depth 1 -b fix_compatibility_2004_2204 ../grasp-plugin
       - name: Install dependencies (non-noetic)
         shell: bash
         if: ${{ matrix.rosdistro != 'noetic' }}

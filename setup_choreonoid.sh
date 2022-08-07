@@ -58,6 +58,8 @@ source ./choreonoid/misc/script/install-requisites-ubuntu-$VERSION_ID.sh
 # Compatibility
 if [  ${ROS_DISTRO} = "indigo" ]; then
   sudo apt install cmake3 -y
+elif [ ${ROS_DISTRO} = "noetic"  ]; then
+  sudo apt install gettext python-is-python2 -y
 elif [ $CNOID_TAG = "v1.7.0" ]; then
   :
 else
@@ -70,13 +72,17 @@ fi
 
 echo "Entering build-choreonoid/..."
 mkdir ./build-choreonoid && cd ./build-choreonoid
+
+set -e
 cmake ../choreonoid -DGRASP_PLUGINS=$GRASP_PLUGINS \
 -DGRASP_ROBOT_MODEL_PLUGINS=$GRASP_ROBOT_MODEL_PLUGINS \
 -DBUILD_GRASP_PCL_PLUGIN=ON \
+-DREAD_PCD_ON=ON \
 -DUSE_QT5=$USE_QT5 \
 -DUSE_PYTHON3=$USE_PYTHON3 \
 -DUSE_PYBIND11=$USE_PYBIND11
-LIBRARY_PATH=/opt/ros/${ROS_DISTRO}/lib make -j`nproc` && cd ..
+LIBRARY_PATH=/opt/ros/${ROS_DISTRO}/lib make -j`nproc`
+cd ..
 echo "Leaving build-choreonoid/..."
 
 

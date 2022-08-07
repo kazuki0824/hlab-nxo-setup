@@ -17,6 +17,7 @@
   <run_depend>liblapack-dev</run_depend>
   <run_depend>openrtm_tools</run_depend>
   <run_depend>pcl_ros</run_depend>
+  <run_depend>libqt5x11extras5-dev</run_depend>
 
   <export>
     <metapackage/>
