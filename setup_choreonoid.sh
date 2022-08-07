@@ -6,7 +6,11 @@ export GRASP_PLUGINS="Grasp;PRM;GeometryHandler;RobotInterface;ConstraintIK;Soft
 export GRASP_ROBOT_MODEL_PLUGINS='HIRO/Plugin'
 export CNOID_TAG=${1:-v1.7.0}
 
-if [ ${ROS_DISTRO} = "indigo" ]; then
+if [ $CNOID_TAG = "v1.7.0" ]; then
+  export USE_QT5="ON"
+  export USE_PYTHON3="ON"
+  export USE_PYBIND11="ON"
+elif [ ${ROS_DISTRO} = "indigo" ]; then
   export USE_QT5="OFF"
   export USE_PYTHON3="OFF"
   export USE_PYBIND11="OFF"
@@ -23,7 +27,6 @@ env | grep ROS_DISTRO
 env | grep CNOID_TAG
 env | grep GRASP
 env | grep USE
-env | grep ENABLE_PYTHON
 
 
 . /etc/os-release
