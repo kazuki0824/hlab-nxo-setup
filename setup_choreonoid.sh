@@ -16,7 +16,7 @@ elif [   ${ROS_DISTRO} = "indigo"  ]; then
 else
   export USE_QT5="ON"
   export USE_PYTHON3="OFF"
-  export USE_PYBIND11="OFF"
+  export USE_PYBIND11="ON"
 fi
 env | grep ROS_DISTRO
 env | grep CNOID_TAG
