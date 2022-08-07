@@ -52,7 +52,7 @@ if [ $ROS_DISTRO = "noetic" ]; then
     export CMAKEARGS="-DUSE_HRPSYSEXT=OFF -DCATKIN_ENABLE_TESTING=OFF -DENABLE_DOXYGEN=OFF"
     
     export PKGNAME=""
-    if [ "$CI" -eq 1 ]; then
+    if [ ${CI:-0} -eq 1 ]; then
         export NOETIC_CI=1
         export DEBIAN_FRONTEND=noninteractive
         export PKGNAME=grasp_plugin-meta
@@ -71,7 +71,7 @@ catkin b $PKGNAME --no-status --summarize --cmake-args $CMAKEARGS
 # catkin test
 
 
-if [ $CI -ne 1 ] && [ $IN_BUILD -eq 0 ]; then
+if [ ${CI:-0} -ne 1 ] && [ $IN_BUILD -eq 0 ]; then
     cd ..
     read -p "Do you want to add environment setup to ~/.bashrc? (y/N): " yn
     if [[ $yn = [yY] ]]; then
@@ -79,7 +79,7 @@ if [ $CI -ne 1 ] && [ $IN_BUILD -eq 0 ]; then
     fi
     rm -r overlay_ws/
 fi
-if [ "$NOETIC_CI" -eq 1 ]; then
+if [ ${NOETIC_CI:-0} -eq 1 ]; then
     echo "source $PWD/devel/setup.bash" >> ~/.bashrc
 fi
 
