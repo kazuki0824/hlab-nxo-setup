@@ -5,23 +5,25 @@ set -u
 export GRASP_PLUGINS="Grasp;PRM;GeometryHandler;RobotInterface;ConstraintIK;SoftFingerStability;PCL;GraspDataGen;MotionFile"
 export GRASP_ROBOT_MODEL_PLUGINS='HIRO/Plugin'
 export CNOID_TAG=${1:-v1.7.0}
-if [ $CNOID_TAG = "v1.7.0" ]; then
+if [ $CNOID_TAG = "v1.5.0" ]; then
   export USE_QT5="ON"
-  export USE_PYTHON3="ON"
-  export USE_PYBIND11="ON"
-elif [   ${ROS_DISTRO} = "indigo"  ]; then
+  export ENABLE_PYTHON="ON"
+  export USE_PYTHON3="OFF"
+  export USE_PYBIND11="OFF"
+if [   ${ROS_DISTRO} = "indigo"  ]; then
   export USE_QT5="OFF"
   export USE_PYTHON3="OFF"
   export USE_PYBIND11="OFF"
 else
   export USE_QT5="ON"
-  export USE_PYTHON3="OFF"
+  export USE_PYTHON3="ON"
   export USE_PYBIND11="ON"
 fi
 env | grep ROS_DISTRO
 env | grep CNOID_TAG
 env | grep GRASP
 env | grep USE
+env | grep ENABLE_PYTHON
 
 
 . /etc/os-release
