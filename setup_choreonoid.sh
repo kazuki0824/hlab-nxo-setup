@@ -58,7 +58,7 @@ source ./choreonoid/misc/script/install-requisites-ubuntu-$VERSION_ID.sh
 
 # Compatibility
 if [ ${ROS_DISTRO} = "noetic"  ]; then
-  sudo apt install gettext python-is-python2 -y
+  sudo apt install gettext python-is-python2 --no-install-recommends -y
   ## See: https://docs.python.org/ja/3/c-api/unicode.html
   ## バージョン 3.7 で変更: 返り値の型が char * ではなく const char * になりました。
   echo "Patching the following file(s):"
@@ -66,11 +66,11 @@ if [ ${ROS_DISTRO} = "noetic"  ]; then
   find ./choreonoid/src -name 'PyQString.h' | xargs sed -i 's/  char\* data = PyUnicode_AsUTF8AndSize/  const char\* data = PyUnicode_AsUTF8AndSize/g'
 fi
 if [  ${ROS_DISTRO} = "indigo" ]; then
-  sudo apt install cmake3 -y
+  sudo apt install cmake3 --no-install-recommends -y
   find ./choreonoid/src -name 'MessageView.cpp'
   find ./choreonoid/src -name 'MessageView.cpp' | xargs sed -i 's#  textEdit.setSizeAdjustPolicy(QAbstractScrollArea::AdjustIgnored);#//textEdit.setSizeAdjustPolicy(QAbstractScrollArea::AdjustIgnored);#g'
 elif [ $CNOID_TAG = "v1.5.0" ]; then
-  sudo apt install python-dev -y
+  sudo apt install python-dev -y --no-install-recommends
 elif [ $CNOID_TAG = "v1.7.0" ]; then
   :
 else
