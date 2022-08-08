@@ -23,7 +23,6 @@ env | grep ROS_DISTRO
 env | grep CNOID_TAG
 env | grep GRASP
 env | grep USE
-env | grep ENABLE_PYTHON
 
 
 . /etc/os-release
@@ -58,10 +57,16 @@ sleep 2
 source ./choreonoid/misc/script/install-requisites-ubuntu-$VERSION_ID.sh
 
 # Compatibility
+if [ ${ROS_DISTRO} = "noetic"  ]; then
+  sudo apt install gettext python-is-python2 -y
+  ## See: https://docs.python.org/ja/3/c-api/unicode.html
+  ## バージョン 3.7 で変更: 返り値の型が char * ではなく const char * になりました。
+  echo "Patching the following file(s):"
+  find ./choreonoid/src -name 'PyQString.h'
+  find ./choreonoid/src -name 'PyQString.h' | xargs sed -i 's/  char\* data = PyUnicode_AsUTF8AndSize/  const char\* data = PyUnicode_AsUTF8AndSize/g'
+fi
 if [  ${ROS_DISTRO} = "indigo" ]; then
   sudo apt install cmake3 -y
-elif [ ${ROS_DISTRO} = "noetic"  ]; then
-  sudo apt install gettext python-is-python2 -y
 elif [ $CNOID_TAG = "v1.7.0" ]; then
   :
 else
@@ -83,7 +88,7 @@ cmake ../choreonoid -DGRASP_PLUGINS=$GRASP_PLUGINS \
 -DUSE_QT5=$USE_QT5 \
 -DUSE_PYTHON3=$USE_PYTHON3 \
 -DUSE_PYBIND11=$USE_PYBIND11
-LIBRARY_PATH=/opt/ros/${ROS_DISTRO}/lib make -j`nproc`
+LIBRARY_PATH=/opt/ros/${ROS_DISTRO}/lib make -k -j`nproc`
 cd ..
 echo "Leaving build-choreonoid/..."
 
