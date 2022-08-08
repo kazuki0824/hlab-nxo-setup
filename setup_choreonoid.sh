@@ -67,6 +67,10 @@ if [ ${ROS_DISTRO} = "noetic"  ]; then
 fi
 if [  ${ROS_DISTRO} = "indigo" ]; then
   sudo apt install cmake3 -y
+  find ./choreonoid/src -name 'MessageView.cpp'
+  find ./choreonoid/src -name 'MessageView.cpp' | xargs sed -i 's#  textEdit.setSizeAdjustPolicy(QAbstractScrollArea::AdjustIgnored);#//textEdit.setSizeAdjustPolicy(QAbstractScrollArea::AdjustIgnored);#g'
+elif [ $CNOID_TAG = "v1.5.0" ]; then
+  sudo apt install python-dev -y
 elif [ $CNOID_TAG = "v1.7.0" ]; then
   :
 else
