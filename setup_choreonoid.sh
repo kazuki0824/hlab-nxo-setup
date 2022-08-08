@@ -88,7 +88,7 @@ cmake ../choreonoid -DGRASP_PLUGINS=$GRASP_PLUGINS \
 -DUSE_QT5=$USE_QT5 \
 -DUSE_PYTHON3=$USE_PYTHON3 \
 -DUSE_PYBIND11=$USE_PYBIND11
-LIBRARY_PATH=/opt/ros/${ROS_DISTRO}/lib make -j`nproc`
+LIBRARY_PATH=/opt/ros/${ROS_DISTRO}/lib make -k -j`nproc`
 cd ..
 echo "Leaving build-choreonoid/..."
 
