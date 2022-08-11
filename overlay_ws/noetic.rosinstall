@@ -41,4 +41,10 @@
     uri: https://github.com/anqixu/ueye_cam.git
     local-name: ueye_cam
     version: master
-    
+# find_package(collada_urdf) failed due to wrong collada_urdfConfig.cmake
+# - https://github.com/ros/collada_urdf/issues/43
+# - https://github.com/ros/collada_urdf/pull/44
+- git:
+    local-name: collada_urdf
+    uri: https://github.com/werner291/collada_urdf.git
+    version: patch-1
