@@ -9,6 +9,7 @@ on:
 
 jobs:
   openrtp:
+    timeout-minutes: 15
     strategy:
     # java has little difference among environments, so fail-fast works effective.
       fail-fast: true
