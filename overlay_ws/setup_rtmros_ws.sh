@@ -48,25 +48,24 @@ if [ $ROS_DISTRO = "noetic" ]; then
     sed -i -e 's/python-setuptool/python3-setuptool/g' src/openrtm_common/rtshell/package.xml
     sed -i -e 's/python-setuptool/python3-setuptool/g' src/openrtm_common/rtsprofile/package.xml
     sed -i -e 's/python-setuptool/python3-setuptool/g' src/openrtm_common/rtctree/package.xml
-    ## Workarounds for noetic. If CMAKE_INSTALL_PREFIX is modified ar_track_alvar can't find its message package. This has to be fixed.
+
     export CMAKEARGS="-DUSE_HRPSYSEXT=OFF -DCATKIN_ENABLE_TESTING=OFF -DENABLE_DOXYGEN=OFF"
     
-    export PKGNAME=""
     if [ ${CI:-0} -eq 1 ]; then
-        export NOETIC_CI=1
         export DEBIAN_FRONTEND=noninteractive
-        export PKGNAME=grasp_plugin-meta
     fi
 else
     sudo apt install python-catkin-tools -y --no-install-recommends
-    export CMAKEARGS="-DCMAKE_INSTALL_PREFIX=$HOME/.preinstalled"
+    export CMAKEARGS=""
 fi
 if [ $IN_BUILD -eq 0 ] && [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
     sudo rosdep init
 fi
 rosdep update --include-eol-distros && rosdep install -y -q -i --from-paths src
-catkin config --install
-catkin b $PKGNAME --no-status --summarize --cmake-args $CMAKEARGS
+## Consider a situation where package `A` and its dependent package `msgs_for_A` are in the src directory and the dependencies are set correctly. If CMAKE_INSTALL_PREFIX is specified, package `A` will not be able to find `msgs_for_A` anymore!
+## So here catkin config -i is used.
+catkin config --install -i $HOME/.preinstalled
+catkin b --no-status --summarize --cmake-args $CMAKEARGS
 ## Since the initial pose is modified, the test case test_setTargetPoseRelative_rpy won't pass. So testing is masked.
 # catkin test
 
@@ -78,8 +77,5 @@ if [ ${CI:-0} -ne 1 ] && [ $IN_BUILD -eq 0 ]; then
         echo 'source $HOME/.preinstalled/setup.bash' >> ~/.bashrc
     fi
     rm -r overlay_ws/
-fi
-if [ ${NOETIC_CI:-0} -eq 1 ]; then
-    echo "source $PWD/devel/setup.bash" >> ~/.bashrc
 fi
 
