@@ -14,6 +14,33 @@ on:
     branches: [ main ]
 
 jobs:
+  master:
+    name: grapsPlugin + latest Choreonoid
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        ubuntu-version: ["impish", "focal"]
+    container:
+      image: ubuntu:${{ matrix.ubuntu-version }}
+      
+    steps:
+      - name: Install git
+        run: |
+          apt update
+          apt install git -yq
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          lfs: false
+      - name: Fetch graspPlugin from original gitlab
+        run: git clone http://${{ secrets.GRASPPLUGIN_CRED_USER }}:${{ secrets.GRASPPLUGIN_CRED_PASS }}@spica.ms.t.kanazawa-u.ac.jp/gitlab/tsuji/grasp-plugin.git --depth 1 -b fix_compatibility_2004_2204 ../grasp-plugin
+      - name: Execute setup_choreonoid.sh (without RobotInterface)
+        shell: bash
+        run: sed -i -e s/RobotInterface//g ./setup_choreonoid.sh && cd .. && ./hlab-nxo-setup/setup_choreonoid.sh master
+      
+      
   orig:
     name: graspPlugin(original)
     runs-on: ubuntu-latest
