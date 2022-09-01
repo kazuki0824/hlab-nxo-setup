@@ -38,7 +38,7 @@ jobs:
         run: git clone http://${{ secrets.GRASPPLUGIN_CRED_USER }}:${{ secrets.GRASPPLUGIN_CRED_PASS }}@spica.ms.t.kanazawa-u.ac.jp/gitlab/tsuji/grasp-plugin.git --depth 1 -b fix_compatibility_2004_2204 ../grasp-plugin
       - name: Execute setup_choreonoid_master.sh (without RobotInterface)
         shell: bash
-        run: cd .. && CI=1 ./hlab-nxo-setup/setup_choreonoid_master.sh master
+        run: cd .. && ./hlab-nxo-setup/setup_choreonoid_master.sh master
       
       
   orig:

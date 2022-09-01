@@ -1,9 +1,7 @@
 #!/bin/bash
 set -u
 
-if [ "${CI:-0}" -eq 1 ]; then
-    export DEBIAN_FRONTEND=noninteractive
-fi
+export DEBIAN_FRONTEND=noninteractive
 
 # Compatibility
 export GRASP_PLUGINS="Grasp;PRM;GeometryHandler;ConstraintIK;SoftFingerStability;PCL;GraspDataGen;MotionFile"
