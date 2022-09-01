@@ -40,20 +40,18 @@ ln -s "$(readlink -f ./grasp-plugin)" ./choreonoid/ext/graspPlugin
 echo "Ubuntu $VERSION_ID is selected. Installing dependencies..."
 
 
-wget --spider https://raw.githubusercontent.com/choreonoid/choreonoid/master/misc/script/install-requisites-ubuntu-"$VERSION_ID".sh || \
-wget --spider https://raw.githubusercontent.com/choreonoid/choreonoid/master/misc/script/install-requisites-ubuntu-21.04.sh
+wget --spider https://raw.githubusercontent.com/choreonoid/choreonoid/master/misc/script/install-requisites-ubuntu-"$VERSION_ID".sh
 if [ $? -eq 0 ]; then
   rm ./choreonoid/misc/script/install-requisites-ubuntu-"$VERSION_ID".sh || :
-  wget https://raw.githubusercontent.com/choreonoid/choreonoid/v1.7.0/misc/script/install-requisites-ubuntu-"$VERSION_ID".sh -P ./choreonoid/misc/script/ || \
   wget https://raw.githubusercontent.com/choreonoid/choreonoid/master/misc/script/install-requisites-ubuntu-"$VERSION_ID".sh -P ./choreonoid/misc/script/
 else
   echo 'Fetching has been skipped since not found.'
 fi
 sleep 2
-source ./choreonoid/misc/script/install-requisites-ubuntu-"$VERSION_ID".sh
+source ./choreonoid/misc/script/install-requisites-ubuntu-*.sh
 
 # Compatibility
-sudo apt install gettext python-is-python2 --no-install-recommends -y
+sudo apt install libboost-all-dev --no-install-recommends -y
 
 ## See: https://docs.python.org/ja/3/c-api/unicode.html
 ## バージョン 3.7 で変更: 返り値の型が char * ではなく const char * になりました。

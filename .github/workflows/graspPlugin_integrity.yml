@@ -15,13 +15,13 @@ on:
 
 jobs:
   master:
-    name: grapsPlugin + latest Choreonoid
+    name: graspPlugin + latest Choreonoid
     runs-on: ubuntu-latest
     timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
-        ubuntu-version: ["jammy", "focal"]
+        ubuntu-version: ["focal"]
     container:
       image: ubuntu:${{ matrix.ubuntu-version }}
       
