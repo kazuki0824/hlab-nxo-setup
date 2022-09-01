@@ -46,10 +46,10 @@ else
   echo 'Fetching has been skipped since not found.'
 fi
 sleep 2
-source ./choreonoid/misc/script/install-requisites-ubuntu-*.sh
+source ./choreonoid/misc/script/install-requisites-ubuntu-"$VERSION_ID".sh
 
 # Compatibility
-sudo apt install libboost-all-dev --no-install-recommends -y
+sudo apt install libboost-all-dev libpcl-dev  --no-install-recommends -y
 
 ## See: https://docs.python.org/ja/3/c-api/unicode.html
 ## バージョン 3.7 で変更: 返り値の型が char * ではなく const char * になりました。
