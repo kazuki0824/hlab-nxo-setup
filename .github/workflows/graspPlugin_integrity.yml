@@ -21,24 +21,24 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ubuntu-version: ["impish", "focal"]
+        ubuntu-version: ["jammy", "focal"]
     container:
       image: ubuntu:${{ matrix.ubuntu-version }}
       
     steps:
-      - name: Install git
+      - name: Install dependent packages
         run: |
           apt update
-          apt install git -yq
+          apt install git wget sudo -yq
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           lfs: false
       - name: Fetch graspPlugin from original gitlab
         run: git clone http://${{ secrets.GRASPPLUGIN_CRED_USER }}:${{ secrets.GRASPPLUGIN_CRED_PASS }}@spica.ms.t.kanazawa-u.ac.jp/gitlab/tsuji/grasp-plugin.git --depth 1 -b fix_compatibility_2004_2204 ../grasp-plugin
-      - name: Execute setup_choreonoid.sh (without RobotInterface)
+      - name: Execute setup_choreonoid_master.sh (without RobotInterface)
         shell: bash
-        run: sed -i -e s/RobotInterface//g ./setup_choreonoid.sh && cd .. && ROS_DISTRO="" ./hlab-nxo-setup/setup_choreonoid.sh master
+        run: cd .. && ./hlab-nxo-setup/setup_choreonoid_master.sh master
       
       
   orig:
@@ -54,10 +54,10 @@ jobs:
       image: ros:${{ matrix.rosdistro }}
 
     steps:
-      - name: Install git
+      - name: Install dependent packages
         run: |
           apt update
-          apt install git -yq
+          apt install git wget -yq
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
