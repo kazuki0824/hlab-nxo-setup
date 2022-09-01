@@ -13,6 +13,7 @@ export CNOID_TAG=${1:-master}
 export USE_QT5="ON"
 export USE_PYTHON3="ON"
 export USE_PYBIND11="ON"
+export ENABLE_BACKWARD_COMPATIBILITY="ON"
 
 env | grep ROS_DISTRO
 env | grep CNOID
@@ -39,8 +40,8 @@ ln -s "$(readlink -f ./grasp-plugin)" ./choreonoid/ext/graspPlugin
 echo "Ubuntu $VERSION_ID is selected. Installing dependencies..."
 
 
-wget --spider https://raw.githubusercontent.com/choreonoid/choreonoid/v1.7.0/misc/script/install-requisites-ubuntu-"$VERSION_ID".sh || \
-wget --spider https://raw.githubusercontent.com/choreonoid/choreonoid/master/misc/script/install-requisites-ubuntu-"$VERSION_ID".sh
+wget --spider https://raw.githubusercontent.com/choreonoid/choreonoid/master/misc/script/install-requisites-ubuntu-"$VERSION_ID".sh || \
+wget --spider https://raw.githubusercontent.com/choreonoid/choreonoid/master/misc/script/install-requisites-ubuntu-21.04.sh
 if [ $? -eq 0 ]; then
   rm ./choreonoid/misc/script/install-requisites-ubuntu-"$VERSION_ID".sh || :
   wget https://raw.githubusercontent.com/choreonoid/choreonoid/v1.7.0/misc/script/install-requisites-ubuntu-"$VERSION_ID".sh -P ./choreonoid/misc/script/ || \
@@ -75,7 +76,8 @@ cmake ../choreonoid -DGRASP_PLUGINS=$GRASP_PLUGINS \
 -DREAD_PCD_ON=ON \
 -DUSE_QT5=$USE_QT5 \
 -DUSE_PYTHON3=$USE_PYTHON3 \
--DUSE_PYBIND11=$USE_PYBIND11
+-DUSE_PYBIND11=$USE_PYBIND11 \
+-DENABLE_BACKWARD_COMPATIBILITY=$ENABLE_BACKWARD_COMPATIBILITY
 make -k -j`nproc`
 cd ..
 echo "Leaving build-choreonoid/..."
