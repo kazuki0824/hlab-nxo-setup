@@ -1,6 +1,10 @@
 #!/bin/bash
 set -u
 
+if [ "${CI:-0}" -eq 1 ]; then
+    export DEBIAN_FRONTEND=noninteractive
+fi
+
 # Compatibility
 export GRASP_PLUGINS="Grasp;PRM;GeometryHandler;ConstraintIK;SoftFingerStability;PCL;GraspDataGen;MotionFile"
 export GRASP_ROBOT_MODEL_PLUGINS='HIRO/Plugin'
