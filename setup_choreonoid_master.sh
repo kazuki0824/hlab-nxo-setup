@@ -71,7 +71,7 @@ cmake ../choreonoid -DGRASP_PLUGINS=$GRASP_PLUGINS \
 -DUSE_PYTHON3=$USE_PYTHON3 \
 -DBUILD_POSE_SEQ_PLUGIN=ON \
 -DENABLE_BACKWARD_COMPATIBILITY=$ENABLE_BACKWARD_COMPATIBILITY
-make -k -j`nproc`
+make -k -j$(nproc)
 cd ..
 echo "Leaving build-choreonoid/..."
 
