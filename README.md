@@ -3,6 +3,26 @@
 [![Check OpenRTP Installer](https://github.com/kazuki0824/hlab-nxo-setup/actions/workflows/openrtp_deployment_test.yml/badge.svg)](https://github.com/kazuki0824/hlab-nxo-setup/actions/workflows/openrtp_deployment_test.yml)
 [![graspPlugin Builder](https://github.com/kazuki0824/hlab-nxo-setup/actions/workflows/graspPlugin_integrity.yml/badge.svg)](https://github.com/kazuki0824/hlab-nxo-setup/actions/workflows/graspPlugin_integrity.yml)
 
+## 対応状況
+[![graspPlugin Builder](https://github.com/kazuki0824/hlab-nxo-setup/actions/workflows/graspPlugin_integrity.yml/badge.svg)](https://github.com/kazuki0824/hlab-nxo-setup/actions/workflows/graspPlugin_integrity.yml)
+⇐これが*緑色*になっているとき、以下の環境でテスト済み。
+
+### 単体
+```
+GRASP_PLUGINS="Grasp;PRM;GeometryHandler;ConstraintIK;SoftFingerStability;PCL;GraspDataGen;MotionFile"
+GRASP_ROBOT_MODEL_PLUGINS='HIRO/Plugin'
+```
+Ubuntu 20.04とmasterブランチのChoreonoidとの組み合わせでビルド可
+
+### graspPlugin + RobotInterface + rtmros_nextage
+|          | noetic    | melodic | kinetic | indigo |
+|---|---|---|---|---|
+| Choreonoid v1.7.0  | ※ | ✅ | ✅ | ✅ |
+| Choreonoid v1.6.0  | ※ | ✅ | ✅ | ✅ |
+| Choreonoid v1.5.0  | ※ | ✅ | ✅ | ✅ |
+
+※ビルド可, rtshell非対応
+
 ## How to use
 ### Nextage, ROS, OpenRTP
 1. Clone this recursively ```git clone https://github.com/kazuki0824/hlab-nxo-setup.git --depth 1 --recursive```
@@ -153,3 +173,4 @@ echo localhost:15005 > ./choreonoid/ext/graspPlugin/RobotInterface/Nextage/Nexta
 
 ```
 After this, you can control the simulated robot in the hrpsys-simulator through HiroNXGUI and RobotInterface plugin.
+
