@@ -47,7 +47,7 @@ sleep 2
 source ./choreonoid/misc/script/install-requisites-ubuntu-"$VERSION_ID".sh
 
 # Compatibility
-sudo apt install libboost-all-dev libpcl-dev liblapack-dev freeglut3-dev --no-install-recommends -y
+sudo apt install libboost-all-dev libpcl-dev liblapack-dev freeglut3-dev libusb-1.0-0-dev --no-install-recommends -y
 
 ## See: https://docs.python.org/ja/3/c-api/unicode.html
 ## バージョン 3.7 で変更: 返り値の型が char * ではなく const char * になりました。
