@@ -30,7 +30,10 @@ if [ ! -d ./grasp-plugin ]; then
   exit 1
 fi
 
-git clone https://github.com/choreonoid/choreonoid.git --depth 1 -b "$CNOID_TAG"
+git clone https://github.com/choreonoid/choreonoid.git
+cd choreonoid
+git checkout -d "$CNOID_TAG"
+cd ..
 
 ln -s "$(readlink -f ./grasp-plugin)" ./choreonoid/ext/graspPlugin
 echo "Ubuntu $VERSION_ID is selected. Installing dependencies..."
@@ -47,7 +50,7 @@ sleep 2
 source ./choreonoid/misc/script/install-requisites-ubuntu-"$VERSION_ID".sh
 
 # Compatibility
-sudo apt install libboost-all-dev libpcl-dev liblapack-dev freeglut3-dev --no-install-recommends -y
+sudo apt install libboost-all-dev libpcl-dev liblapack-dev freeglut3-dev libusb-1.0-0-dev --no-install-recommends -y
 
 ## See: https://docs.python.org/ja/3/c-api/unicode.html
 ## バージョン 3.7 で変更: 返り値の型が char * ではなく const char * になりました。
@@ -71,7 +74,7 @@ cmake ../choreonoid -DGRASP_PLUGINS=$GRASP_PLUGINS \
 -DUSE_PYTHON3=$USE_PYTHON3 \
 -DBUILD_POSE_SEQ_PLUGIN=ON \
 -DENABLE_BACKWARD_COMPATIBILITY=$ENABLE_BACKWARD_COMPATIBILITY
-make -k -j`nproc`
+make -k -j$(nproc)
 cd ..
 echo "Leaving build-choreonoid/..."
 

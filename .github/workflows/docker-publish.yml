@@ -31,7 +31,7 @@ jobs:
       # with sigstore/fulcio when running outside of PRs.
       id-token: write
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         rosdistro: [noetic, melodic, kinetic, indigo]
 

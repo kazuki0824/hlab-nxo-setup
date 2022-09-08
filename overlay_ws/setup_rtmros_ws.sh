@@ -24,7 +24,7 @@ fi
 
 set -e
 cd src
-. /opt/ros/${ROS_DISTRO:-melodic}/setup.bash
+. /opt/ros/"${ROS_DISTRO:-melodic}"/setup.bash
 
 set +e
 git clone https://github.com/kazuki0824/rtmros_hironx.git -b fix/notest --depth 1 ; \
@@ -33,7 +33,7 @@ git clone https://github.com/kazuki0824/rtmros_hironx.git -b fix/notest --depth 
 
 set -e
 cd ../..
-if [ $ROS_DISTRO = "noetic" ]; then
+if [ "$ROS_DISTRO" = "noetic" ]; then
     ## See https://github.com/fkanehiro/hrpsys-base/blob/2336d264de48625a914a5edcb2063343f69a0b47/util/simulator/CMakeLists.txt#L35
     sudo apt install libboost-python-dev -y --no-install-recommends
     sudo apt install python3-vcstool python3-catkin-tools python-is-python2 python-yaml -y --no-install-recommends
@@ -51,29 +51,29 @@ if [ $ROS_DISTRO = "noetic" ]; then
 
     export CMAKEARGS="-DUSE_HRPSYSEXT=OFF -DCATKIN_ENABLE_TESTING=OFF -DENABLE_DOXYGEN=OFF"
     
-    if [ ${CI:-0} -eq 1 ]; then
+    if [ "${CI:-0}" -eq 1 ]; then
         export DEBIAN_FRONTEND=noninteractive
     fi
 else
     sudo apt install python-catkin-tools -y --no-install-recommends
     export CMAKEARGS=""
 fi
-if [ $IN_BUILD -eq 0 ] && [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
+if [ "$IN_BUILD" -eq 0 ] && [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
     sudo rosdep init
 fi
 rosdep update --include-eol-distros && rosdep install -y -q -i --from-paths src
 ## Consider a situation where package `A` and its dependent package `msgs_for_A` are in the src directory and the dependencies are set correctly. If CMAKE_INSTALL_PREFIX is specified, package `A` will not be able to find `msgs_for_A` anymore!
-## So here catkin config -i is used.
-catkin config --install -i $HOME/.preinstalled
+## So here `catkin config -i` is used.
+catkin config --install -i "$HOME"/.preinstalled
 catkin b --no-status --summarize --cmake-args $CMAKEARGS
 ## Since the initial pose is modified, the test case test_setTargetPoseRelative_rpy won't pass. So testing is masked.
 # catkin test
 
 
-if [ ${CI:-0} -ne 1 ] && [ $IN_BUILD -eq 0 ]; then
+if [ "${CI:-0}" -ne 1 ] && [ "$IN_BUILD" -eq 0 ]; then
     cd ..
-    read -p "Do you want to add environment setup to ~/.bashrc? (y/N): " yn
-    if [[ $yn = [yY] ]]; then
+    read -pr "Do you want to add environment setup to ~/.bashrc? (y/N): " yn
+    if [[ "$yn" = [yY] ]]; then
         echo 'source $HOME/.preinstalled/setup.bash' >> ~/.bashrc
     fi
     rm -r overlay_ws/
