@@ -30,7 +30,10 @@ if [ ! -d ./grasp-plugin ]; then
   exit 1
 fi
 
-git clone https://github.com/choreonoid/choreonoid.git --depth 1 -b "$CNOID_TAG"
+git clone https://github.com/choreonoid/choreonoid.git
+cd choreonoid
+git checkout -d "$CNOID_TAG"
+cd ..
 
 ln -s "$(readlink -f ./grasp-plugin)" ./choreonoid/ext/graspPlugin
 echo "Ubuntu $VERSION_ID is selected. Installing dependencies..."
