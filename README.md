@@ -80,7 +80,7 @@ connect_rtc
 1. Run the following to establish the container
 ```bash
 xhost +local:user && \
-docker run --rm --gpus all -it -e DISPLAY=unix$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix ghcr.io/kazuki0824/hlab-nxo-setup:noetic && \
+docker run --rm --pull always --gpus all -it -e DISPLAY=unix$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix ghcr.io/kazuki0824/hlab-nxo-setup:melodic && \
 xhost -local:user
 ```
 2. 
