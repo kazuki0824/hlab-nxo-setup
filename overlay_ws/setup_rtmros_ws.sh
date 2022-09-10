@@ -55,7 +55,8 @@ if [ "$ROS_DISTRO" = "noetic" ]; then
         export DEBIAN_FRONTEND=noninteractive
     fi
 else
-    sudo apt install python-catkin-tools -y --no-install-recommends
+    # omniNames needs netstat
+    sudo apt install python-catkin-tools net-tools -y --no-install-recommends
     export CMAKEARGS=""
 fi
 if [ "$IN_BUILD" -eq 0 ] && [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
