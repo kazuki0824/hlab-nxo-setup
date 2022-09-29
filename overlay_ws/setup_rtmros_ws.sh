@@ -62,7 +62,7 @@ fi
 if [ "$IN_BUILD" -eq 0 ] && [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
     sudo rosdep init
 fi
-rosdep update --include-eol-distros && rosdep install -y -q -i --from-paths src
+rosdep update && rosdep update --include-eol-distros && rosdep install -y -q -i --from-paths src
 ## Consider a situation where package `A` and its dependent package `msgs_for_A` are in the src directory and the dependencies are set correctly. If CMAKE_INSTALL_PREFIX is specified, package `A` will not be able to find `msgs_for_A` anymore!
 ## So here `catkin config -i` is used.
 catkin config --install -i "$HOME"/.preinstalled
