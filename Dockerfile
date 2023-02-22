@@ -4,7 +4,7 @@ ARG DISTRIBUTION=melodic
 FROM openjdk:8-jdk-slim AS javabuild
 WORKDIR /tmp/externals
 COPY ./externals/ /tmp/externals/
-RUN apt update && apt install bash git ant unzip zip curl --no-install-recommends -y
+RUN apt update && apt install bash git ant unzip zip curl sudo --no-install-recommends -y
 RUN bash ./install_RTP.sh
 
 
@@ -36,7 +36,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt purge software-properties-common --auto-remove -y && \
     update-java-alternatives -s java-1.8.0-openjdk-amd64
     
-RUN apt install -q -y --no-install-recommends cmake-qt-gui gnome-terminal dbus-x11 sudo
+RUN apt install -q -y --no-install-recommends cmake-qt-gui gnome-terminal dbus-x11
 
 
 # nvidia-container-runtime
