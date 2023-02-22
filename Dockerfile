@@ -36,7 +36,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt purge software-properties-common --auto-remove -y && \
     update-java-alternatives -s java-1.8.0-openjdk-amd64
     
-RUN apt install -q -y --no-install-recommends cmake-qt-gui gnome-terminal dbus-x11
+RUN apt install -q -y --no-install-recommends cmake-qt-gui gnome-terminal dbus-x11 sudo
 
 
 # nvidia-container-runtime
