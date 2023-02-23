@@ -28,7 +28,7 @@ if [ ! -f eclipse-java-oxygen-3a-linux-gtk-x86_64.tar.gz ]; then
 fi
 tar zxvf eclipse-java-oxygen-3a-linux-gtk-x86_64.tar.gz
 
-PKGS='openjdk-8-jdk ant'
+PKGS='openjdk-8 ant'
 if [ $IN_BUILD -eq 0 ]; then
     sudo apt install software-properties-common -y
     sudo add-apt-repository ppa:openjdk-r/ppa -y
