@@ -1,7 +1,7 @@
 ARG DISTRIBUTION=melodic
 
 
-FROM openjdk:8-jdk-slim AS javabuild
+FROM ubuntu:latest AS javabuild
 WORKDIR /tmp/externals
 COPY ./externals/ /tmp/externals/
 RUN apt update && apt install bash git ant unzip zip curl sudo --no-install-recommends -y
