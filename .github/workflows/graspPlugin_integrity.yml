@@ -84,7 +84,7 @@ jobs:
         if: ${{ matrix.rosdistro == 'noetic' }}
         run: |
           cd ./overlay_ws
-          CI=1 ./setup_rtmros_ws.sh
+          CI=1 ./setup_rtmros_ws.sh -y
           cd ..
       - name: Execute setup_choreonoid.sh
         shell: bash

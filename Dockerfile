@@ -1,11 +1,11 @@
 ARG DISTRIBUTION=melodic
 
 
-FROM openjdk:8-jdk-slim AS javabuild
+FROM ubuntu:latest AS javabuild
 WORKDIR /tmp/externals
 COPY ./externals/ /tmp/externals/
-RUN apt update && apt install bash git ant unzip zip curl --no-install-recommends -y
-RUN bash ./install_RTP.sh
+RUN apt update && apt install bash git ant unzip zip curl sudo --no-install-recommends -y
+RUN ./install_RTP.sh -b
 
 
 FROM ros:${DISTRIBUTION}
@@ -18,7 +18,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 COPY ./overlay_ws/ /tmp/overlay_ws/
 WORKDIR /tmp/overlay_ws
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-    bash ./setup_rtmros_ws.sh
+    ./setup_rtmros_ws.sh -y
 
 WORKDIR /
 RUN rm -r /tmp/overlay_ws

@@ -1,28 +1,12 @@
 #!/bin/bash
 
-#https://stackoverflow.com/questions/69860182/how-to-detect-if-the-current-script-is-running-in-a-docker-build
-isDocker(){
-    local cgroup=/proc/1/cgroup
-    test -f $cgroup && [[ "$(<$cgroup)" = *:cpuset:/docker/* ]]
-}
-
-isDockerBuildkit(){
-    local cgroup=/proc/1/cgroup
-    test -f $cgroup && [[ "$(<$cgroup)" = *:cpuset:/docker/buildkit/* ]]
-}
-
-isDockerContainer(){
-    [ -e /.dockerenv ]
-}
-
-if isDockerBuildkit || (isDocker && ! isDockerContainer) then
-  IN_BUILD=1
-else
-  IN_BUILD=0
-fi
-
 
 set -e
+
+if [ "$1" == "-y" ]; then
+    option_y=true
+fi
+
 cd src
 . /opt/ros/"${ROS_DISTRO:-melodic}"/setup.bash
 
@@ -71,7 +55,7 @@ catkin b --no-status --summarize --cmake-args $CMAKEARGS
 # catkin test
 
 
-if [ "${CI:-0}" -ne 1 ] && [ "$IN_BUILD" -eq 0 ]; then
+if [ "$option_y" != "true" ]; then
     cd ..
     read -pr "Do you want to add environment setup to ~/.bashrc? (y/N): " yn
     if [[ "$yn" = [yY] ]]; then
