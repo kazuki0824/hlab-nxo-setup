@@ -4,7 +4,7 @@
 set -e
 
 if [ "$1" == "-y" ]; then
-    option_y = true
+    option_y=true
 fi
 
 cd src
