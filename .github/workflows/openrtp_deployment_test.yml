@@ -14,7 +14,7 @@ jobs:
     # java has little difference among environments, so fail-fast works effective.
       fail-fast: true
       matrix:
-        platform: [ubuntu-20.04, ubuntu-18.04, ubuntu-latest]
+        platform: [ubuntu-20.04, ubuntu-22.04]
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v3
