@@ -31,7 +31,7 @@ jobs:
           apt update
           apt install git wget sudo lsb-release -yq
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           lfs: false
       - name: Fetch graspPlugin from original gitlab
@@ -59,7 +59,7 @@ jobs:
           apt update
           apt install git wget -yq
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           lfs: false
       # - name: Fetch dependencies from rosinstall
