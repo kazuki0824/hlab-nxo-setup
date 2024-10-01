@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 90
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         cnoid_tag: [ "v1.7.0", "v1.6.0", "v1.5.0" ]
         rosdistro: [ "noetic", "melodic", "kinetic", "indigo" ]
@@ -59,8 +59,15 @@ jobs:
         run: |
           apt update
           apt install git wget -yq
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
       - name: Checkout repository
         uses: actions/checkout@v4
+        env:
+          ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
+          ACTIONS_RUNNER_FORCED_INTERNAL_NODE_VERSION: node16
+          ACTIONS_RUNNER_FORCE_ACTIONS_NODE_VERSION: node16
         with:
           lfs: false
       # - name: Fetch dependencies from rosinstall
