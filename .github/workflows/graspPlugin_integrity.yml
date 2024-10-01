@@ -33,6 +33,8 @@ jobs:
           apt install git wget sudo lsb-release -yq
       - name: Checkout repository
         uses: actions/checkout@v4
+        env:
+          ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
         with:
           lfs: false
       - name: Fetch graspPlugin from original gitlab
@@ -61,6 +63,8 @@ jobs:
           apt install git wget -yq
       - name: Checkout repository
         uses: actions/checkout@v4
+        env:
+          ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
         with:
           lfs: false
       # - name: Fetch dependencies from rosinstall
