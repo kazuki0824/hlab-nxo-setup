@@ -34,15 +34,10 @@ jobs:
       fail-fast: true
       matrix:
         rosdistro: [noetic, melodic, kinetic, indigo]
-    defaults:
-      run:
-        working-directory: hlab-nxo-setup
 
     steps:
       - name: Clone
-        run: |
-          cd ..
-          git clone https://github.com/kazuki0824/hlab-nxo-setup.git hlab-nxo-setup --recurse-submodules
+        run: git clone https://github.com/kazuki0824/hlab-nxo-setup.git . --recurse-submodules
 
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer

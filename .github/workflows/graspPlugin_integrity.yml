@@ -53,20 +53,14 @@ jobs:
         rosdistro: [ "noetic", "melodic", "kinetic", "indigo" ]
     container:
       image: ros:${{ matrix.rosdistro }}
-    defaults:
-      run:
-        working-directory: hlab-nxo-setup
 
     steps:
       - name: Install dependent packages
         run: |
           apt update
           apt install git wget -yq
-        uses: actions/checkout@v4
       - name: Clone
-        run: |
-          cd ..
-          git clone https://github.com/kazuki0824/hlab-nxo-setup.git hlab-nxo-setup --recurse-submodules
+        run: git clone https://github.com/kazuki0824/hlab-nxo-setup.git . --recurse-submodules
       # - name: Fetch dependencies from rosinstall
       #   if: ${{ matrix.rosdistro == 'noetic' }}
       #   run: vcs import overlay_ws/src < overlay_ws/.rosinstall

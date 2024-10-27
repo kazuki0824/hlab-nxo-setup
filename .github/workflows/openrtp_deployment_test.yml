@@ -15,15 +15,10 @@ jobs:
       matrix:
         platform: [ubuntu-20.04, ubuntu-22.04]
     runs-on: ${{ matrix.platform }}
-    defaults:
-      run:
-        working-directory: hlab-nxo-setup
     
     steps:
       - name: Clone
-        run: |
-          cd ..
-          git clone https://github.com/kazuki0824/hlab-nxo-setup.git hlab-nxo-setup --recurse-submodules
+        run: git clone https://github.com/kazuki0824/hlab-nxo-setup.git . --recurse-submodules
 
       - name: Build & Install OpenRTP
         run: |
