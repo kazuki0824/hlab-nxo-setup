@@ -9,9 +9,9 @@ fi
 
 set -eu
 if [ ! -f eclipse-java-oxygen-3a-linux-gtk-x86_64.tar.gz ]; then
-    curl -OJL https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/3a/eclipse-java-oxygen-3a-linux-gtk-x86_64.tar.gz
+    curl -JL https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/3a/eclipse-java-oxygen-3a-linux-gtk-x86_64.tar.gz -o download.tgz
 fi
-tar zxvf ./eclipse-java-oxygen-3a-linux-gtk-x86_64.tar.gz
+tar zxvf ./download.tgz
 
 PKGS='openjdk-8-jdk ant zip'
 if [ $IN_BUILD -eq 0 ]; then
