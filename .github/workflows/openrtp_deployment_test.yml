@@ -15,16 +15,16 @@ jobs:
       matrix:
         platform: [ubuntu-20.04, ubuntu-22.04]
     runs-on: ${{ matrix.platform }}
+    defaults:
+      run:
+        working-directory: hlab-nxo-setup
+    
     steps:
-      - uses: actions/checkout@v4
-        env:
-          ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
-          ACTIONS_RUNNER_FORCED_INTERNAL_NODE_VERSION: node16
-          ACTIONS_RUNNER_FORCE_ACTIONS_NODE_VERSION: node16
-        with:
-          submodules: recursive
-          lfs: false
-        
+      - name: Clone
+        run: |
+          cd ..
+          git clone https://github.com/kazuki0824/hlab-nxo-setup.git hlab-nxo-setup --recurse-submodules
+
       - name: Build & Install OpenRTP
         run: |
           cd externals/
