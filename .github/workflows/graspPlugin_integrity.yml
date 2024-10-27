@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 90
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         cnoid_tag: [ "v1.7.0", "v1.6.0", "v1.5.0" ]
         rosdistro: [ "noetic", "melodic", "kinetic", "indigo" ]
@@ -59,10 +59,8 @@ jobs:
         run: |
           apt update
           apt install git wget -yq
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          lfs: false
+      - name: Clone
+        run: git clone https://github.com/kazuki0824/hlab-nxo-setup.git . --recurse-submodules
       # - name: Fetch dependencies from rosinstall
       #   if: ${{ matrix.rosdistro == 'noetic' }}
       #   run: vcs import overlay_ws/src < overlay_ws/.rosinstall
