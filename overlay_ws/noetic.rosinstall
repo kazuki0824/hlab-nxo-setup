@@ -15,19 +15,7 @@
 - git: 
     local-name: openrtm_common/openrtm_aist_python
     uri: https://github.com/tork-a/openrtm_aist_python-release.git
-    version: release/melodic/openrtm_aist_python
-- git:
-    local-name: openrtm_common/rtshell
-    uri: https://github.com/tork-a/rtshell-release.git
-    version: debian/melodic/rtshell
-- git:
-    local-name: openrtm_common/rtsprofile
-    uri: https://github.com/tork-a/rtsprofile-release.git
-    version: debian/melodic/rtsprofile
-- git:
-    local-name: openrtm_common/rtctree
-    uri: https://github.com/tork-a/rtctree-release.git
-    version: debian/melodic/rtctree
+    version: release/noetic/openrtm_aist_python
 
 - git:
     local-name: ar_track_alvar

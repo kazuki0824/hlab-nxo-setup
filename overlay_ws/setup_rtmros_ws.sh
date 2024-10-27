@@ -29,9 +29,6 @@ if [ "$ROS_DISTRO" = "noetic" ]; then
     sed -i -e 's/ipython</ipython3</g' src/rtmros_common/hrpsys_ros_bridge/package.xml
     sed -i -e 's/python-rosdep/python3-rosdep/g' src/rtmros_common/hrpsys_ros_bridge/package.xml
     sed -i -e 's/python-setuptool/python3-setuptool/g' src/openrtm_common/openrtm_aist_python/package.xml
-    sed -i -e 's/python-setuptool/python3-setuptool/g' src/openrtm_common/rtshell/package.xml
-    sed -i -e 's/python-setuptool/python3-setuptool/g' src/openrtm_common/rtsprofile/package.xml
-    sed -i -e 's/python-setuptool/python3-setuptool/g' src/openrtm_common/rtctree/package.xml
 
     export CMAKEARGS="-DUSE_HRPSYSEXT=OFF -DCATKIN_ENABLE_TESTING=OFF -DENABLE_DOXYGEN=OFF"
     
